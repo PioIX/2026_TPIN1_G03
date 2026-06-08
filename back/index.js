@@ -39,7 +39,7 @@ console.log('Error:', error.message)
 });
 
 
-app.get('/Usuario', async function(req, res){
+app.get('/Usuarios', async function(req, res){
 	try {
 		console.log(req.query)
 		id=req.query.id
@@ -69,17 +69,13 @@ app.get('/Items', async function(req, res){
 	try {
 		console.log(req.query)
 		id=req.query.id
-		ordered=req.query.ordered
 
 		if (id){
 			respuesta = await MySQL.realizarQuery(`SELECT * FROM Items WHERE id = ${id};`)
 
-		}else{if(ordered){
-			respuesta = await MySQL.realizarQuery(`SELECT * FROM Items order by price asc;`)
 		}else{
-			respuesta = await MySQL.realizarQuery(`SELECT * FROM Items;`)
-		}
-			
+			respuesta = await MySQL.realizarQuery(`SELECT * FROM Items order by price asc;`)
+		
 		}
 	
 			
