@@ -228,11 +228,12 @@ app.delete('/ItemsporUsuario', async function(req, res){
 
 app.put('/Usuarios', async function(req, res){
 try {
-		username=req.query.username
-		password=req.query.password
-		points=req.query.points
-		is_admin=req.query.is_admin
-		id=req.query.id
+		let username=req.body.username
+		let password=req.body.password
+		let points=req.body.points
+		let is_admin=req.body.is_admin
+		let id=req.body.id
+		console.log(username,id)
 		if(username){
 			await MySQL.realizarQuery(`UPDATE Usuarios SET 
 			username = "${req.body.username}" WHERE id = ${req.body.id};`)
@@ -262,10 +263,10 @@ try {
 
 app.put('/Items', async function(req, res){
 try {
-		name=req.query.name
-		imgsrc=req.query.imgsrc
-		price=req.query.price
-		id=req.query.id
+		let name=req.body.name
+		let imgsrc=req.body.imgsrc
+		let price=req.body.price
+		let id=req.body.id
 		if(name){
 			await MySQL.realizarQuery(`UPDATE Items SET 
 			name = "${req.body.name}" WHERE id = ${req.body.id};`)
@@ -291,8 +292,8 @@ try {
 
 app.put('/onactive', async function(req, res){
 try {
-		userid=req.query.userid
-		itemid=req.query.itemid
+		let userid=req.body.userid
+		let itemid=req.body.itemid
 
 			await MySQL.realizarQuery(`UPDATE ItemsporUsuario SET 
 			active = True WHERE userid = ${req.body.userid} AND itemid = ${req.body.itemid};`)
@@ -308,8 +309,8 @@ try {
 
 app.put('/offactive', async function(req, res){
 try {
-		userid=req.query.userid
-		itemid=req.query.itemid
+		let userid=req.body.userid
+		let itemid=req.body.itemid
 
 			await MySQL.realizarQuery(`UPDATE ItemsporUsuario SET 
 			active = False WHERE userid = ${req.body.userid} AND itemid = ${req.body.itemid};`)
@@ -322,13 +323,6 @@ try {
 	});
 }
 });
-
-
-
-
-
-
-
 
 
 
