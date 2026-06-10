@@ -80,7 +80,7 @@ class Blackjack{
 
     dealerTurn(){
   
-            this.givedealcard()
+        this.givedealcard()
 
           
         
@@ -93,7 +93,8 @@ class Blackjack{
             if (this.dealsum>21){
                 console.log("Ganaste!")
                 return 1
-            }else{if(this.dealsum>this.usersum){
+            }else{
+            if((this.dealsum>this.usersum && this.dealsum<21) || this.dealsum==21){
                 console.log("Perdiste")
                 return -1
             }else{
@@ -109,10 +110,8 @@ class Blackjack{
 
     }
 
-};
-let juego=new Blackjack();
-juego.givedealcard()
-juego.giveusercard()
+}
+
 
 
 
