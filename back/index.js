@@ -1,7 +1,7 @@
 var express = require('express'); //Tipo de servidor: Express
 var bodyParser = require('body-parser'); //Convierte los JSON
 var cors = require('cors');
-const MySQL = require('../modulos/mysql');
+const MySQL = require('./modulos/mysql');
 
 var app = express();
 var port = process.env.PORT || 4000;
@@ -18,6 +18,311 @@ app.get('/', function(req, res){
 	});
 });
 
+
+app.get('/Ranking', async function(req, res){
+	try {
+		console.log(req.query)
+			
+			respuesta = await MySQL.realizarQuery(`SELECT * FROM Usuarios order by points desc;`)
+	
+		
+				
+		res.status(200).send({
+				message: respuesta
+			});
+	} catch (error) {
+console.log('Error:', error.message)
+		res.status(500).send({
+			message: "Error al obtener el ranking"
+		});
+	}
+});
+
+
+app.get('/Usuarios', async function(req, res){
+	try {
+		console.log(req.query)
+		id=req.query.id
+		if (id){
+			respuesta = await MySQL.realizarQuery(`SELECT * FROM Usuarios WHERE id = ${id};`)
+
+		}else{
+			respuesta = await MySQL.realizarQuery(`SELECT * FROM Usuarios;`)
+		}
+	
+			
+	
+		res.status(200).send({
+			message: respuesta
+		});
+		console.log('Usuario enviado')
+	} catch (error) {
+		console.log('Error:', error.message)
+		res.status(500).send({
+			message: "Error al obtener el usuario"
+		});
+	}
+});
+
+
+app.get('/Items', async function(req, res){
+	try {
+		console.log(req.query)
+		id=req.query.id
+
+		if (id){
+			respuesta = await MySQL.realizarQuery(`SELECT * FROM Items WHERE id = ${id};`)
+
+		}else{
+			respuesta = await MySQL.realizarQuery(`SELECT * FROM Items order by price asc;`)
+		
+		}
+	
+			
+	
+		res.status(200).send({
+			message: respuesta
+		});
+		console.log('Item enviado')
+	} catch (error) {
+		console.log('Error:', error.message)
+		res.status(500).send({
+			message: "Error al obtener el item"
+		});
+	}
+});
+
+
+
+app.get('/ItemsporUsuario', async function(req, res){
+	try {
+		console.log(req.query)
+		userid=req.query.userid
+		itemid=req.query.itemid
+
+		if (userid && itemid){
+			respuesta = await MySQL.realizarQuery(`SELECT * FROM ItemsporUsuario WHERE userid = ${userid} AND itemid = ${itemid};`)
+
+		}else{if(userid){
+			respuesta = await MySQL.realizarQuery(`SELECT * FROM ItemsporUsuario WHERE userid = ${userid};`)
+		}else{
+			respuesta = await MySQL.realizarQuery(`SELECT * FROM ItemsporUsuario;`)
+		}
+			
+		}
+	
+			
+	
+		res.status(200).send({
+			message: respuesta
+		});
+		console.log('ItemporUsuario enviado')
+	} catch (error) {
+		console.log('Error:', error.message)
+		res.status(500).send({
+			message: "Error al obtener el itemporusuario"
+		});
+	}
+});
+
+app.post('/Usuarios', async function(req, res){
+	try {
+		console.log(req.body);
+		existe = await MySQL.realizarQuery(`SELECT * FROM Usuarios WHERE username="${req.body.username}" AND password = "${req.body.password}";`)
+		if (existe.length===0){
+			await MySQL.realizarQuery(`INSERT INTO Usuarios (username,password,points,is_admin)
+			VALUES ("${req.body.username}", "${req.body.password}", ${req.body.points}, ${req.body.is_admin});`)
+			res.send({message: "Usuario agregado"})
+		}else{
+			res.send({message: "usuario ya existe"})
+		};
+	} catch (error) {
+		console.log('Error:', error.message)
+		res.status(500).send({
+			message: "Error al agregar el usuario"
+		});
+
+	}
+});
+
+app.post('/Items', async function(req, res){
+	try {
+		console.log(req.body);
+		existe = await MySQL.realizarQuery(`SELECT * FROM Items WHERE name="${req.body.name}";`)
+		if (existe.length===0){
+			await MySQL.realizarQuery(`INSERT INTO Items (name,imgsrc,price)
+			VALUES ("${req.body.name}", "${req.body.imgsrc}", ${req.body.price});`)
+			res.send({message: "Item agregado"})
+		}else{
+			res.send({message: "Item ya existe"})
+		};
+	} catch (error) {
+		console.log('Error:', error.message)
+		res.status(500).send({
+			message: "Error al agregar el item"
+		});
+
+	}
+});
+
+
+app.post('/ItemsporUsuario', async function(req, res){
+	try {
+		console.log(req.body);
+		existe = await MySQL.realizarQuery(`SELECT * FROM ItemsporUsuario WHERE userid=${req.body.userid} AND itemid=${req.body.itemid};`)
+		if (existe.length===0){
+			await MySQL.realizarQuery(`INSERT INTO ItemsporUsuario (itemid,userid,active)
+			VALUES (${req.body.userid},${req.body.itemid},${req.body.active});`)
+			res.send({message: "Item agregado al usuario"})
+		}else{
+			res.send({message: "Item ya estaba en el usuario"})
+		};
+	} catch (error) {
+		console.log('Error:', error.message)
+		res.status(500).send({
+			message: "Error al agregar el item al usuario"
+		});
+
+	}
+});
+
+
+app.delete('/Usuarios', async function(req, res){
+	try {
+		await MySQL.realizarQuery(`DELETE FROM Usuarios WHERE id = ${req.body.id};`)
+		res.send({message: "Usuario eliminado"})
+	} catch (error) {
+		console.log('Error:', error.message)
+		res.status(500).send({
+			message: "Error al eliminar el usuario"
+		});
+	}
+});
+
+app.delete('/Items', async function(req, res){
+	try {
+		await MySQL.realizarQuery(`DELETE FROM Items WHERE id = ${req.body.id};`)
+		res.send({message: "Item eliminado"})
+	} catch (error) {
+		console.log('Error:', error.message)
+		res.status(500).send({
+			message: "Error al eliminar el item"
+		});
+	}
+});
+
+
+app.delete('/ItemsporUsuario', async function(req, res){
+	try {
+		await MySQL.realizarQuery(`DELETE FROM ItemsporUsuario WHERE userid = ${req.body.userid} AND itemid= ${req.body.itemid};`)
+		res.send({message: "Item eliminado del usuario"})
+	} catch (error) {
+		console.log('Error:', error.message)
+		res.status(500).send({
+			message: "Error al eliminar el item del usuario"
+		});
+	}
+});
+
+
+
+app.put('/Usuarios', async function(req, res){
+try {
+		let username=req.body.username
+		let password=req.body.password
+		let points=req.body.points
+		let is_admin=req.body.is_admin
+		let id=req.body.id
+		console.log(username,id)
+		if(username){
+			await MySQL.realizarQuery(`UPDATE Usuarios SET 
+			username = "${req.body.username}" WHERE id = ${req.body.id};`)
+		}
+		if(password){
+			await MySQL.realizarQuery(`UPDATE Usuarios SET 
+			password = "${req.body.password}" WHERE id = ${req.body.id};`)
+		}
+		if(points){
+			await MySQL.realizarQuery(`UPDATE Usuarios SET 
+			points = ${req.body.points} WHERE id = ${req.body.id};`)
+		}
+		if(is_admin){
+			await MySQL.realizarQuery(`UPDATE Usuarios SET 
+			is_admin = ${req.body.is_admin} WHERE id = ${req.body.id};`)
+		}
+		res.send({message: "Usuario actualizado"})
+} catch (error) {
+	console.log('Error:', error.message)
+	res.status(500).send({
+		message: "Error al actualizar el usuario"
+	});
+}
+});
+
+
+
+app.put('/Items', async function(req, res){
+try {
+		let name=req.body.name
+		let imgsrc=req.body.imgsrc
+		let price=req.body.price
+		let id=req.body.id
+		if(name){
+			await MySQL.realizarQuery(`UPDATE Items SET 
+			name = "${req.body.name}" WHERE id = ${req.body.id};`)
+		}
+		if(imgsrc){
+			await MySQL.realizarQuery(`UPDATE Items SET 
+			imgsrc = "${req.body.imgsrc}" WHERE id = ${req.body.id};`)
+		}
+		if(price){
+			await MySQL.realizarQuery(`UPDATE Items SET 
+			price = ${req.body.price} WHERE id = ${req.body.id};`)
+		}
+		
+		res.send({message: "Item actualizado"})
+} catch (error) {
+	console.log('Error:', error.message)
+	res.status(500).send({
+		message: "Error al actualizar el item"
+	});
+}
+});
+
+
+app.put('/onactive', async function(req, res){
+try {
+		let userid=req.body.userid
+		let itemid=req.body.itemid
+
+			await MySQL.realizarQuery(`UPDATE ItemsporUsuario SET 
+			active = True WHERE userid = ${req.body.userid} AND itemid = ${req.body.itemid};`)
+		
+		res.send({message: "Item activado"})
+} catch (error) {
+	console.log('Error:', error.message)
+	res.status(500).send({
+		message: "Error al activar el item"
+	});
+}
+});
+
+app.put('/offactive', async function(req, res){
+try {
+		let userid=req.body.userid
+		let itemid=req.body.itemid
+
+			await MySQL.realizarQuery(`UPDATE ItemsporUsuario SET 
+			active = False WHERE userid = ${req.body.userid} AND itemid = ${req.body.itemid};`)
+		
+		res.send({message: "Item desactivado"})
+} catch (error) {
+	console.log('Error:', error.message)
+	res.status(500).send({
+		message: "Error al desactivar el item"
+	});
+}
+});
 
 
 
