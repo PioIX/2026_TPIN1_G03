@@ -1,5 +1,7 @@
 let users = []
 
+
+
 function handleSignup(){
     const username = prompt("Ingrese su nombre de usuario deseado...");
     for (i=0; i<users.length; i++) {
@@ -7,5 +9,13 @@ function handleSignup(){
             const username = prompt("Nombre de usuario en uso. Por favor, ingrese uno nuevo...")
         }
     }
-    const password = prompt("ingrese su contraseña deseada...")
+    const password = prompt("Ingrese su contraseña deseada...")
+}
+
+function logicLogin(username,password){
+
+}
+
+function handleLogin(username,password){
+    
 }
