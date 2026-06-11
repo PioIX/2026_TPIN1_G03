@@ -17,11 +17,26 @@
     <button id="buttonhit" onclick="hit()">Hit</button>
     <button id="buttonstand" onclick="stand()">Stand</button>
     <button onclick="window.location.href='index.html';">Volver</button>
-
+    <dialog id="win">
+  <p>Ganaste!</p>
+  <p>Dealer: <span id="sumadealer"></span></p>
+  <p>Vos: <span id="sumauser"></span></p>
+  <button id="reload" onclick="window.location.reload();">Volver a jugar</button>
+  <button id="home" onclick="window.location.href='index.html';">Ir a la página principal</button>
+    </dialog>
+<dialog id="lose">
+  <p>Perdiste</p>
+  <p>Dealer: <span id="sumadealer2"></span></p>
+  <p>Vos: <span id="sumauser2"></span></p>
+  <button id="reload" onclick="window.location.reload();">Volver a jugar</button>
+  <button id="home" onclick="window.location.href='index.html';">Ir a la página principal</button>
+    </dialog>
+    <script src="fetch.js"></script>
     <script src="blackjack.js"></script>
-    <script  src="fetch.js"></script>
-    <script  src="juego.js"></script>
-
+    <script src="juego.js"></script>
+    <script src="items.js"></script>
+    <script src="usuarios.js"></script>
+    <script src="logic.js"></script>
     
 </body>
 </html>
