@@ -1,11 +1,9 @@
-let idItem=1
 class Item{
-    constructor(name,imgsrc,price){
+    constructor(name,imgsrc,price,idItem){
         this.name=name
         this.imgsrc=imgsrc
         this.price=price
         this.idItem=idItem
-        idItem++
     }
 }
 
