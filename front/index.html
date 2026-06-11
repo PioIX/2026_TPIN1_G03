@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>sa</title>
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="styles.css">
+
 </head>
 <body>
     <h1>Blackjack</h1>
-    <button onclick="handleSignup()">
+     <button>
         Registro
     </button>
-    <button onclick="handleLogin()">
-        Iniciar Sesion
+    <button>
+        Login
     </button>
+    <button id="iniciar" onclick="window.location.href='juego.html';">Jugar</button>
     <button>
         Tienda
     </button>
-    <button>
-        Jugar
-    </button>
-    <button>
+  <button>
         Ranking
     </button>
 
@@ -27,9 +27,9 @@
     
     <script src="fetch.js"></script>
     <script src="blackjack.js"></script>
+    <script src="juego.js"></script>
     <script src="items.js"></script>
     <script src="usuarios.js"></script>
     <script src="logic.js"></script>
-
 </body>
 </html>
