@@ -1,4 +1,8 @@
 let juego = {};
+let winpoints=0
+UserLogged=getUsuarioporID(1)
+
+
 
 const cartasref = [
   "1",
@@ -18,7 +22,19 @@ const cartasref = [
 const buttonhit = document.getElementById("buttonhit");
 const buttonstand = document.getElementById("buttonstand");
 window.addEventListener("load", iraljuego());
-
+function handleir(){
+  modal=document.getElementById("dialogpoints")
+  conf=document.getElementById("confirmpoints")
+  modal.showModal()
+  conf.addEventListener("click", () =>{
+    winpoints=document.getElementById("inputpoints").value
+    console.log("points: ")
+    console.log(winpoints)
+    window.location.href='juego.html';
+    winpoints=document.getElementById("inputpoints").value=0
+  })
+  
+}
 async function iraljuego() {
   console.log("juego");
   juego = new Blackjack();
@@ -108,15 +124,19 @@ function stand(){
 
 
 function win(){
+  UserLogged.points+=winpoints
   const modal = document.getElementById("win");
-  alert(juego.dealsum)
-  alert(juego.usersum)//terminar de mostrar valores
-  document.getElementById("sumadealer2").innerText=juego.dealsum
-  document.getElementById("sumauser2").innerText=juego.usersum
+  document.getElementById("sumadealer1").innerText=juego.dealsum
+  document.getElementById("sumauser1").innerText=juego.usersum
+  document.getElementById("points1").innerText=UserLogged.points
   modal.showModal();
 }
 
 function lose(){
+  UserLogged.points-=winpoints
   const modal = document.getElementById("lose");
+  document.getElementById("sumadealer2").innerText=juego.dealsum
+  document.getElementById("sumauser2").innerText=juego.usersum
+  document.getElementById("points2").innerText=UserLogged.points
   modal.showModal();
 }

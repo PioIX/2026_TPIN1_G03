@@ -128,7 +128,7 @@ app.get('/ItemsporUsuario', async function(req, res){
 app.post('/Usuarios', async function(req, res){
 	try {
 		console.log(req.body);
-		existe = await MySQL.realizarQuery(`SELECT * FROM Usuarios WHERE username="${req.body.username}" AND password = "${req.body.password}";`)
+		existe = await MySQL.realizarQuery(`SELECT * FROM Usuarios WHERE username="${req.body.username}";`)
 		if (existe.length===0){
 			await MySQL.realizarQuery(`INSERT INTO Usuarios (username,password,points,is_admin)
 			VALUES ("${req.body.username}", "${req.body.password}", ${req.body.points}, ${req.body.is_admin});`)

@@ -15,7 +15,7 @@
     <button>
         Login
     </button>
-    <button id="iniciar" onclick="window.location.href='juego.html';">Jugar</button>
+    <button id="iniciar" onclick="handleir()">Jugar</button>
     <button>
         Tienda
     </button>
@@ -25,6 +25,13 @@
 
     
     
+    <dialog id="dialogpoints">
+  <p>Seleccione cuantos puntos quiere apostar</p>
+  
+  <input type="number" id="inputpoints">
+  <button id="confirmpoints" >Enviar</button>
+    </dialog>
+
     <script src="fetch.js"></script>
     <script src="blackjack.js"></script>
     <script src="juego.js"></script>
