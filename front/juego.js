@@ -125,6 +125,7 @@ function stand(){
 
 function win(){
   UserLogged.points+=winpoints
+  putPoints(UserLogged.points,UserLogged.id)
   const modal = document.getElementById("win");
   document.getElementById("sumadealer1").innerText=juego.dealsum
   document.getElementById("sumauser1").innerText=juego.usersum
@@ -134,6 +135,7 @@ function win(){
 
 function lose(){
   UserLogged.points-=winpoints
+  putPoints(UserLogged.points,UserLogged.id)
   const modal = document.getElementById("lose");
   document.getElementById("sumadealer2").innerText=juego.dealsum
   document.getElementById("sumauser2").innerText=juego.usersum
