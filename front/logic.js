@@ -1,38 +1,32 @@
-let users = []
 let UserLogged = {} // despues = objeto de usuario loggeado
 
 
 function handleSignup(){
-    const username = prompt("Ingrese su nombre de usuario deseado...");
-    while (username == ""){
-        const username = prompt("Llena los campos...")
-    }
-    for (i=0; i<users.length; i++) {
-        while (username == users[i].username){
-            const username = prompt("Nombre de usuario en uso. Por favor, ingrese uno nuevo...")
+    const respuestaUsername = prompt("Ingrese su nombre de usuario deseado...");
+    if (respuestaUsername == "" || getUsuarioporUsername(respuestaUsername).length !== 0) {
+        const respuestaUsername = prompt("Valor en uso o vacio. Por favor, ingrese uno nuevo...")
+    } else {
+        const respuestaPassword = prompt("Ingrese su contraseña deseada...")
+        if (respuestaPassword == ""){
+            const respuestaPassword = prompt("Valor vacio. Completelo...")
         }
     }
-    const password = prompt("Ingrese su contraseña deseada...")
-    while (password == ""){
-        const password = prompt("Llena los campos...")
-    }
-    signup()
+    let newUsuario = new Usuario(idUser)
+    postUsuario(newUsuario)
+    return newUsuario.idUser
 }
 
-function login(username,password){
-    for (let i = 0; i < users.length; i++) {
-        if (username == users[i].username) {
-            if (password == users[i].password) {
-                return users[i].idUser
-            } else {
-                return 0
-            }
+function handleLogin(){
+    const respuestaUsername = prompt("Ingrese su nombre de usuario...")
+    const respuestaPassword = prompt("Ingrese la contraseña del usuario...")
+    let leerUsername = getUsuarioporUsername(respuestaUsername)
+
+    if (leerUsername.length !== 0) {
+        if (respuestaPassword == leerUsername.password) {
+            UserLogged = new Usuario(leerUsername.id)
+            UserLogged.updateuser()
+        }else {
+            alert("La contraseña no es correcta.")
         }
     }
-}
-
-function handleLogin(username,password){
-}
-
-function signup(username,password) {
 }
