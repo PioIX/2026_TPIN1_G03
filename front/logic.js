@@ -1,5 +1,5 @@
 let users = []
-let UserLogged = {} // despues newuser.idUser
+let UserLogged = {} // despues = objeto de usuario loggeado
 
 
 function handleSignup(){
