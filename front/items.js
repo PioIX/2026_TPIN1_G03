@@ -1,11 +1,15 @@
 class Item{
-    constructor(name,imgsrc,price,idItem){
-        this.name=name
-        this.imgsrc=imgsrc
-        this.price=price
-        this.idItem=idItem
+    constructor(idItem){
+        this.name=""
+        this.imgsrc=""
+        this.price=""
+        this.id=idItem
+    }
+    async updateitem(){
+        let newitem= await getItemporID(this.id);
+        this.name=newitem.name
+        this.imgsrc=newitem.imgsrc
+        this.price=newitem.price
     }
 }
 
-const mySkibidi= new Item("Josu","Imgsrc",123421321321)
-const noSkibidi= new Item("Joooooosu","imgsrc2",321)

@@ -63,11 +63,13 @@ function hit() {
       console.log("w")
       document.getElementById("aviso").innerText = "Ganaste!";
       turn=false
+      win()
        
     }else{if(res==-1){
       console.log("l")
       document.getElementById("aviso").innerText = "Perdiste";
       turn=false
+      lose()
     }
       
       
@@ -84,11 +86,13 @@ function stand(){
       console.log("w")
       document.getElementById("aviso").innerText = "Ganaste!";
       turn=false
+      win()
        
     }else{if(res==-1){
       console.log("l")
       document.getElementById("aviso").innerText = "Perdiste";
       turn=false
+      lose()
     }
       
       
@@ -99,4 +103,20 @@ function stand(){
 
   }
 
+}
+
+
+
+function win(){
+  const modal = document.getElementById("win");
+  alert(juego.dealsum)
+  alert(juego.usersum)//terminar de mostrar valores
+  document.getElementById("sumadealer2").innerText=juego.dealsum
+  document.getElementById("sumauser2").innerText=juego.usersum
+  modal.showModal();
+}
+
+function lose(){
+  const modal = document.getElementById("lose");
+  modal.showModal();
 }

@@ -1,13 +1,19 @@
 class Usuario{
-    constructor(username,password,idUser){
-        this.username=username
-        this.password=password
+    constructor(idUser){
+        this.username=""
+        this.password=""
         this.is_admin=false
         this.points=0
-        this.idUser=idUser
+        this.id=idUser
         this.items=[]
+    }
+    async updateuser(){
+        let newuser= await getUsuarioporID(this.id);
+        this.username=newuser.username
+        this.password=newuser.password
+        this.is_admin=newuser.is_admin
+        this.points=newuser.points
+        this.items=getInventario(this.id)
     }
 }
 
-const awa= new Usuario("Pepe","popo")
-awa.items.push(mySkibidi)
