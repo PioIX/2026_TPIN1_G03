@@ -2,6 +2,7 @@ let UserLogged = {} // despues = objeto de usuario loggeado
 
 
 function handleSignup(){
+    let leerUsername = getUsuarioporUsername(respuestaUsername)
     const respuestaUsername = prompt("Ingrese su nombre de usuario deseado...");
     if (respuestaUsername == "" || getUsuarioporUsername(respuestaUsername).length !== 0) {
         const respuestaUsername = prompt("Valor en uso o vacio. Por favor, ingrese uno nuevo...")
@@ -11,9 +12,9 @@ function handleSignup(){
             const respuestaPassword = prompt("Valor vacio. Completelo...")
         }
     }
-    let newUsuario = new Usuario(idUser)
+    let newUsuario = new Usuario(leerUsername.id)
     postUsuario(newUsuario)
-    return newUsuario.idUser
+    return newUsuario.id
 }
 
 function handleLogin(){
