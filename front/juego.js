@@ -1,6 +1,6 @@
 let juego = {};
 let winpoints=0
-UserLogged=getUsuarioporID(1)
+UserLogged= new Usuario(1)
 
 
 
@@ -22,16 +22,25 @@ const cartasref = [
 const buttonhit = document.getElementById("buttonhit");
 const buttonstand = document.getElementById("buttonstand");
 window.addEventListener("load", iraljuego());
-function handleir(){
+
+async function handleir(){
+  await UserLogged.updateuser()
   modal=document.getElementById("dialogpoints")
   conf=document.getElementById("confirmpoints")
+  document.getElementById("showuserpoints").innerText=UserLogged.points
   modal.showModal()
   conf.addEventListener("click", () =>{
     winpoints=document.getElementById("inputpoints").value
     console.log("points: ")
     console.log(winpoints)
-    window.location.href='juego.html';
-    winpoints=document.getElementById("inputpoints").value=0
+    if ((UserLogged.points<winpoints && !(UserLogged.points==0 && winpoints==1)) || winpoints==0){
+      document.getElementById("ppoints").innerText="Seleccione una cantidad válida"
+      document.getElementById("inputpoints").value=0
+    }else{
+      window.location.href='juego.html';
+      document.getElementById("inputpoints").value=0
+    }
+    
   })
   
 }
@@ -58,7 +67,7 @@ function actualizarUser() {
 }
 function actualizarDealer() {
   let carta = 0;
-      document.getElementById("cartasdealer").innerHTML=`<div id="cartasdealer"></div>`
+      document.getElementById("cartasdealer").innerHTML=`<div id="cartasdealer" class="cartas"></div>`
 
   for (i = 0; i < juego.dealcards.length; i++) {
     carta = juego.cards.indexOf(juego.dealcards[i]);
@@ -70,7 +79,7 @@ function actualizarDealer() {
 
 }
 
-function hit() {
+async function hit() {
   res = juego.userTurn();
   actualizarUser();
   console.log(res)
@@ -79,20 +88,20 @@ function hit() {
       console.log("w")
       document.getElementById("aviso").innerText = "Ganaste!";
       turn=false
-      win()
+      await win()
        
     }else{if(res==-1){
       console.log("l")
       document.getElementById("aviso").innerText = "Perdiste";
       turn=false
-      lose()
+      await lose()
     }
       
       
     }
 }
 
-function stand(){
+async function stand(){
   let turn=true
   while (turn){
     let res=juego.dealerTurn()
@@ -102,13 +111,13 @@ function stand(){
       console.log("w")
       document.getElementById("aviso").innerText = "Ganaste!";
       turn=false
-      win()
+      await win()
        
     }else{if(res==-1){
       console.log("l")
       document.getElementById("aviso").innerText = "Perdiste";
       turn=false
-      lose()
+      await lose()
     }
       
       
@@ -120,12 +129,21 @@ function stand(){
   }
 
 }
+function replay(){
+   if ((UserLogged.points<winpoints && !(UserLogged.points==0 && winpoints==1)) || winpoints==0){
+ //mostrar modal que dice que no se puede continuar con la misma apuesta
+   }else{
+    window.location.reload();
+   }
+  
+}
 
 
-
-function win(){
+async function win(){
+  console.log(winpoints)
   UserLogged.points+=winpoints
-  putPoints(UserLogged.points,UserLogged.id)
+  console.log(UserLogged)
+  await putPoints(UserLogged.points,UserLogged.id)
   const modal = document.getElementById("win");
   document.getElementById("sumadealer1").innerText=juego.dealsum
   document.getElementById("sumauser1").innerText=juego.usersum
@@ -133,9 +151,10 @@ function win(){
   modal.showModal();
 }
 
-function lose(){
+async function lose(){
   UserLogged.points-=winpoints
-  putPoints(UserLogged.points,UserLogged.id)
+  console.log(UserLogged)
+  await putPoints(UserLogged.points,UserLogged.id)
   const modal = document.getElementById("lose");
   document.getElementById("sumadealer2").innerText=juego.dealsum
   document.getElementById("sumauser2").innerText=juego.usersum

@@ -9,11 +9,15 @@ class Usuario{
     }
     async updateuser(){
         let newuser= await getUsuarioporID(this.id);
+        let inv= await getInventario(this.id)
+        console.log(newuser.username)
         this.username=newuser.username
         this.password=newuser.password
         this.is_admin=newuser.is_admin
         this.points=newuser.points
-        this.items=getInventario(this.id)
+        this.items=inv
+        console.log(this)
+
     }
 }
 

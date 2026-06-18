@@ -8,7 +8,7 @@ async function getUsuarioporID(ID) {
       
       console.log(response) 
       console.log(response.message.length)
-      return response.message
+      return response.message[0]
     } catch (error) {
       console.log('Error:', error.message)
     }
@@ -23,7 +23,7 @@ async function getUsuarioporUsername(user) {
       
       console.log(response) 
       console.log(response.message.length)
-      return response.message
+      return response.message[0]
     } catch (error) {
       console.log('Error:', error.message)
     }
@@ -76,7 +76,7 @@ async function getItemporID(ID) {
       const response = await res.json() 
       console.log(response) 
       console.log(response.message.length)
-      return response.message
+      return response.message[0]
     } catch (error) {
       console.log('Error:', error.message)
     }
@@ -97,7 +97,7 @@ async function getUnItemporUnUsuario(itemID,userID) {
       const response = await res.json() 
       console.log(response) 
       console.log(response.message.length)
-      return response.message
+      return response.message[0]
     } catch (error) {
       console.log('Error:', error.message)
     }
@@ -113,7 +113,7 @@ async function getInventario(userID) {
       const response = await res.json() 
       console.log(response) 
       console.log(response.message.length)
-      return response.message
+      return response.message[0]
     } catch (error) {
       console.log('Error:', error.message)
     }
@@ -139,7 +139,7 @@ async function getEstadistica(userID) {
       
       console.log(response) 
       console.log(response.message.length)
-      return response.message
+      return response.message[0]
     } catch (error) {
       console.log('Error:', error.message)
     }
@@ -529,7 +529,7 @@ async function putEstadistica(estad){
           headers: { //Esto va siempre, solo aclaro que va en tipo JSON
               "Content-Type": "application/json", 
             },
-          body: JSON.stringify({estad}) //JSON.stringify convierte de objeto a JSON
+          body: JSON.stringify(estad) //JSON.stringify convierte de objeto a JSON
       })
       console.log(response) //Imprimo la respuesta en formato JSON
       
