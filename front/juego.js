@@ -1,5 +1,5 @@
 let juego = {};
-let winpoints=0
+let winpoints=1
 UserLogged= new Usuario(1)
 
 
@@ -30,21 +30,22 @@ async function handleir(){
   document.getElementById("showuserpoints").innerText=UserLogged.points
   modal.showModal()
   conf.addEventListener("click", () =>{
-    winpoints=document.getElementById("inputpoints").value
-    console.log("points: ")
-    console.log(winpoints)
+  winpoints=document.getElementById("inputpoints").value
     if ((UserLogged.points<winpoints && !(UserLogged.points==0 && winpoints==1)) || winpoints==0){
       document.getElementById("ppoints").innerText="Seleccione una cantidad válida"
-      document.getElementById("inputpoints").value=0
     }else{
+      sessionStorage.setItem("winpoints",winpoints)
       window.location.href='juego.html';
-      document.getElementById("inputpoints").value=0
     }
     
   })
   
 }
 async function iraljuego() {
+  UserLogged.updateuser()
+  console.log(UserLogged)
+  console.log("points: ")
+  console.log(sessionStorage.getItem("winpoints"))
   console.log("juego");
   juego = new Blackjack();
   juego.givedealcard();
@@ -130,6 +131,7 @@ async function stand(){
 
 }
 function replay(){
+  winpoints=sessionStorage.getItem("winpoints")
    if ((UserLogged.points<winpoints && !(UserLogged.points==0 && winpoints==1)) || winpoints==0){
  //mostrar modal que dice que no se puede continuar con la misma apuesta
    }else{
@@ -140,7 +142,9 @@ function replay(){
 
 
 async function win(){
+  winpoints=sessionStorage.getItem("winpoints")
   console.log(winpoints)
+  console.log(UserLogged)
   UserLogged.points+=winpoints
   console.log(UserLogged)
   await putPoints(UserLogged.points,UserLogged.id)
@@ -152,8 +156,10 @@ async function win(){
 }
 
 async function lose(){
+  winpoints=sessionStorage.getItem("winpoints")
   UserLogged.points-=winpoints
   console.log(UserLogged)
+  
   await putPoints(UserLogged.points,UserLogged.id)
   const modal = document.getElementById("lose");
   document.getElementById("sumadealer2").innerText=juego.dealsum

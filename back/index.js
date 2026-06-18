@@ -311,7 +311,7 @@ try {
 			await MySQL.realizarQuery(`UPDATE Usuarios SET 
 			password = "${req.body.password}" WHERE id = ${req.body.id};`)
 		}
-		if(points){
+		if(points || points==0){
 			await MySQL.realizarQuery(`UPDATE Usuarios SET 
 			points = ${req.body.points} WHERE id = ${req.body.id};`)
 		}
@@ -344,7 +344,7 @@ try {
 			await MySQL.realizarQuery(`UPDATE Items SET 
 			imgsrc = "${req.body.imgsrc}" WHERE id = ${req.body.id};`)
 		}
-		if(price){
+		if(price || price==0){
 			await MySQL.realizarQuery(`UPDATE Items SET 
 			price = ${req.body.price} WHERE id = ${req.body.id};`)
 		}
