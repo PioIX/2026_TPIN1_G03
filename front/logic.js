@@ -30,3 +30,13 @@ function handleLogin(){
         }
     }
 }
+
+function tryAdmin() {
+    if (UserLogged.is_admin == true) {
+        window.location.href = 'admin.html'
+    } else if (UserLogged.is_admin == false) {
+        alert("Este usuario no cuenta con privilegios de administracion.")
+    } else {
+        alert("Error!")
+    }
+}

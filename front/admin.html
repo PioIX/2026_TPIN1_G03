@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administracion</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>ADMINISTRACION</h1>
+
+
+    <h2>Usuarios </h2>
+
+    <!-- muestra usuarios en pantalla -->
+    <button onclick="verUsers()">
+        Ver
+    </button>
+
+    <!-- elimina usuarios -->
+    <button onclick="borrarUser()">
+        Eliminar
+    </button>
+
+    <!-- crea usuarios -->
+    <button onclick="creaUser()">
+        Registrar
+    </button>
+
+    <!-- designa admins -->
+    <button onclick="adminUser()">
+        Designar como administrador
+    </button>
+
+    <!-- ajusta puntos -->
+    <button onclick="modPuntosUser()">
+        Modificar puntaje
+    </button>
+
+    <!-- ajusta items -->
+    <button onclick="modItemsUser()">
+        Modificar items
+    </button>
+
+
+    <h2>Items</h2>
+
+    <!-- muestra items -->
+    <button onclick="verItems()">
+        Ver
+    </button>
+
+    <!-- crea un item -->
+    <button onclick="creaItem()">
+        Crear
+    </button>
+
+    <!-- modifica un item -->
+    <button onclick="modItem()">
+        Modificar
+    </button>
+
+    <!-- borra un item -->
+    <button onclick="borrarItem()">
+        Borrar
+    </button>
+
+
+    <h2>Cheats</h2>
+
+    <!-- +500 puntos para un usuario -->
+    <button onclick="cheatPuntos()">
+        +500 puntos
+    </button>
+
+    <!-- todos los items para un usuario -->
+    <button onclick="cheatItems()">
+        Dar todos los items
+    </button>
+
+    <script src="admin.js"></script>
+</body>
+</html>
+
+## Carga datos cuando quiere, administrar usuarios, añade o quita puntos
