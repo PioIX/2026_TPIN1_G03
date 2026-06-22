@@ -1,5 +1,4 @@
-let UserLogged = {} // despues = objeto de usuario loggeado
-
+let UserLogged = {}
 
 function handleSignup(){
     let leerUsername = getUsuarioporUsername(respuestaUsername)
@@ -17,17 +16,19 @@ function handleSignup(){
     return newUsuario.id
 }
 
-function handleLogin(){
+async function handleLogin(){
     const respuestaUsername = prompt("Ingrese su nombre de usuario...")
     const respuestaPassword = prompt("Ingrese la contraseña del usuario...")
-    let leerUsername = getUsuarioporUsername(respuestaUsername)
-
+    let leerUsername = await getUsuarioporUsername(respuestaUsername)
+    console.log(leerUsername.password)
     if (leerUsername.length !== 0) {
-        if (respuestaPassword == leerUsername.password) {
-            UserLogged = new Usuario(leerUsername.id)
-            UserLogged.updateuser()
-        }else {
-            alert("La contraseña no es correcta.")
+        for (i=0; i<leerUsername.length; i++) {
+            if (respuestaPassword == leerUsername.password) {
+                UserLogged == new Usuario(leerUsername.id)
+                UserLogged.updateuser()
+            }else {
+                alert("La contraseña no es correcta.")
+            }
         }
     }
 }

@@ -16,10 +16,8 @@ async function getUsuarioporID(ID) {
 
 async function getUsuarioporUsername(user) {
     try {
-        
       const res = await fetch(`http://localhost:4000/Usuarios?username=${user}`)
       const response = await res.json() 
-      
       console.log(response) 
       console.log(response.message.length)
       return response.message
