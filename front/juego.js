@@ -1,8 +1,7 @@
 let juego = {};
-let winpoints=1
-UserLogged= new Usuario(1)
-
-
+let winpoints = 1
+tempuser = JSON.parse(sessionStorage.getItem("User"))
+UserLogged = new Usuario(tempuser.id)
 
 const cartasref = [
   "1",
