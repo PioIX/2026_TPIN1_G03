@@ -1,4 +1,8 @@
 let juego = {};
+let winpoints=1
+UserLogged= new Usuario(1)
+
+
 
 const cartasref = [
   "1",
@@ -19,7 +23,29 @@ const buttonhit = document.getElementById("buttonhit");
 const buttonstand = document.getElementById("buttonstand");
 window.addEventListener("load", iraljuego());
 
+async function handleir(){
+  await UserLogged.updateuser()
+  modal=document.getElementById("dialogpoints")
+  conf=document.getElementById("confirmpoints")
+  document.getElementById("showuserpoints").innerText=UserLogged.points
+  modal.showModal()
+  conf.addEventListener("click", () =>{
+  winpoints=document.getElementById("inputpoints").value
+    if ((UserLogged.points<winpoints && !(UserLogged.points==0 && winpoints==1)) || winpoints==0){
+      document.getElementById("ppoints").innerText="Seleccione una cantidad válida"
+    }else{
+      sessionStorage.setItem("winpoints",winpoints)
+      window.location.href='juego.html';
+    }
+    
+  })
+  
+}
 async function iraljuego() {
+  UserLogged.updateuser()
+  console.log(UserLogged)
+  console.log("points: ")
+  console.log(sessionStorage.getItem("winpoints"))
   console.log("juego");
   juego = new Blackjack();
   juego.givedealcard();
@@ -42,7 +68,7 @@ function actualizarUser() {
 }
 function actualizarDealer() {
   let carta = 0;
-      document.getElementById("cartasdealer").innerHTML=`<div id="cartasdealer"></div>`
+      document.getElementById("cartasdealer").innerHTML=`<div id="cartasdealer" class="cartas"></div>`
 
   for (i = 0; i < juego.dealcards.length; i++) {
     carta = juego.cards.indexOf(juego.dealcards[i]);
@@ -54,7 +80,7 @@ function actualizarDealer() {
 
 }
 
-function hit() {
+async function hit() {
   res = juego.userTurn();
   actualizarUser();
   console.log(res)
@@ -63,20 +89,20 @@ function hit() {
       console.log("w")
       document.getElementById("aviso").innerText = "Ganaste!";
       turn=false
-      win()
+      await win()
        
     }else{if(res==-1){
       console.log("l")
       document.getElementById("aviso").innerText = "Perdiste";
       turn=false
-      lose()
+      await lose()
     }
       
       
     }
 }
 
-function stand(){
+async function stand(){
   let turn=true
   while (turn){
     let res=juego.dealerTurn()
@@ -86,13 +112,13 @@ function stand(){
       console.log("w")
       document.getElementById("aviso").innerText = "Ganaste!";
       turn=false
-      win()
+      await win()
        
     }else{if(res==-1){
       console.log("l")
       document.getElementById("aviso").innerText = "Perdiste";
       turn=false
-      lose()
+      await lose()
     }
       
       
@@ -104,19 +130,40 @@ function stand(){
   }
 
 }
+function replay(){
+  winpoints=sessionStorage.getItem("winpoints")
+   if ((UserLogged.points<winpoints && !(UserLogged.points==0 && winpoints==1)) || winpoints==0){
+ //mostrar modal que dice que no se puede continuar con la misma apuesta
+   }else{
+    window.location.reload();
+   }
+  
+}
 
 
-
-function win(){
+async function win(){
+  winpoints=sessionStorage.getItem("winpoints")
+  console.log(winpoints)
+  console.log(UserLogged)
+  UserLogged.points+=winpoints
+  console.log(UserLogged)
+  await putPoints(UserLogged.points,UserLogged.id)
   const modal = document.getElementById("win");
-  alert(juego.dealsum)
-  alert(juego.usersum)//terminar de mostrar valores
-  document.getElementById("sumadealer2").innerText=juego.dealsum
-  document.getElementById("sumauser2").innerText=juego.usersum
+  document.getElementById("sumadealer1").innerText=juego.dealsum
+  document.getElementById("sumauser1").innerText=juego.usersum
+  document.getElementById("points1").innerText=UserLogged.points
   modal.showModal();
 }
 
-function lose(){
+async function lose(){
+  winpoints=sessionStorage.getItem("winpoints")
+  UserLogged.points-=winpoints
+  console.log(UserLogged)
+  
+  await putPoints(UserLogged.points,UserLogged.id)
   const modal = document.getElementById("lose");
+  document.getElementById("sumadealer2").innerText=juego.dealsum
+  document.getElementById("sumauser2").innerText=juego.usersum
+  document.getElementById("points2").innerText=UserLogged.points
   modal.showModal();
 }

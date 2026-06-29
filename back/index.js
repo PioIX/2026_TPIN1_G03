@@ -125,10 +125,41 @@ app.get('/ItemsporUsuario', async function(req, res){
 	}
 });
 
+
+
+app.get('/Estadistica', async function(req, res){
+	try {
+		console.log(req.query)
+		userid=req.query.userid
+
+		if (id){
+			respuesta = await MySQL.realizarQuery(`SELECT * FROM Estadistica WHERE userid = ${userid};`)
+
+		}else{
+			respuesta = await MySQL.realizarQuery(`SELECT * FROM Estadistica;`)
+		
+		}
+	
+			
+	
+		res.status(200).send({
+			message: respuesta
+		});
+		console.log('Estadistica enviada')
+	} catch (error) {
+		console.log('Error:', error.message)
+		res.status(500).send({
+			message: "Error al obtener la estadística"
+		});
+	}
+});
+
+
+
 app.post('/Usuarios', async function(req, res){
 	try {
 		console.log(req.body);
-		existe = await MySQL.realizarQuery(`SELECT * FROM Usuarios WHERE username="${req.body.username}" AND password = "${req.body.password}";`)
+		existe = await MySQL.realizarQuery(`SELECT * FROM Usuarios WHERE username="${req.body.username}";`)
 		if (existe.length===0){
 			await MySQL.realizarQuery(`INSERT INTO Usuarios (username,password,points,is_admin)
 			VALUES ("${req.body.username}", "${req.body.password}", ${req.body.points}, ${req.body.is_admin});`)
@@ -187,6 +218,27 @@ app.post('/ItemsporUsuario', async function(req, res){
 });
 
 
+app.post('/Estadistica', async function(req, res){
+	try {
+		console.log(req.body);
+		existe = await MySQL.realizarQuery(`SELECT * FROM Estadistica WHERE userid="${req.body.userid}";`)
+		if (existe.length===0){
+			await MySQL.realizarQuery(`INSERT INTO Estadistica(userid,wins,losses,played,streak,points_lost,cant_items)
+			VALUES (${req.body.userid}, 0,0, 0, 0, 0, 0);`)
+			res.send({message: "Estadistica agregado"})
+		}else{
+			res.send({message: "Estadistica ya existe"})
+		};
+	} catch (error) {
+		console.log('Error:', error.message)
+		res.status(500).send({
+			message: "Error al agregar la Estadistica"
+		});
+
+	}
+});
+
+
 app.delete('/Usuarios', async function(req, res){
 	try {
 		await MySQL.realizarQuery(`DELETE FROM Usuarios WHERE id = ${req.body.id};`)
@@ -226,6 +278,23 @@ app.delete('/ItemsporUsuario', async function(req, res){
 
 
 
+app.delete('/Estadistica', async function(req, res){
+
+	try {
+
+		await MySQL.realizarQuery(`DELETE FROM Estadistica WHERE userid = ${req.body.userid};`)
+		res.send({message: "Estadistica eliminada del usuario"})
+	} catch (error) {
+		console.log('Error:', error.message)
+		res.status(500).send({
+			message: "Error al eliminar la estadistica"
+		});
+	}
+});
+
+
+
+
 app.put('/Usuarios', async function(req, res){
 try {
 		let username=req.body.username
@@ -242,7 +311,7 @@ try {
 			await MySQL.realizarQuery(`UPDATE Usuarios SET 
 			password = "${req.body.password}" WHERE id = ${req.body.id};`)
 		}
-		if(points){
+		if(points || points==0){
 			await MySQL.realizarQuery(`UPDATE Usuarios SET 
 			points = ${req.body.points} WHERE id = ${req.body.id};`)
 		}
@@ -275,7 +344,7 @@ try {
 			await MySQL.realizarQuery(`UPDATE Items SET 
 			imgsrc = "${req.body.imgsrc}" WHERE id = ${req.body.id};`)
 		}
-		if(price){
+		if(price || price==0){
 			await MySQL.realizarQuery(`UPDATE Items SET 
 			price = ${req.body.price} WHERE id = ${req.body.id};`)
 		}
@@ -288,6 +357,51 @@ try {
 	});
 }
 });
+
+
+app.put('/Estadistica', async function(req, res){
+try {
+		let userid=req.body.userid
+		let wins=req.body.wins
+		let losses=req.body.losses
+		let played=req.body.played
+		let streak=req.body.streak
+		let points_lost=req.body.points_lost
+		let cant_items=req.body.cant_items
+		console.log(username,id)
+		if(wins){
+			await MySQL.realizarQuery(`UPDATE Estadistica SET 
+			wins = ${req.body.wins} WHERE id = ${req.body.userid};`)
+		}
+		if(losses){
+			await MySQL.realizarQuery(`UPDATE Estadistica SET 
+			losses = ${req.body.losses} WHERE id = ${req.body.userid};`)
+		}
+		if(played){
+			await MySQL.realizarQuery(`UPDATE Estadistica SET 
+			played = ${req.body.played} WHERE id = ${req.body.userid};`)
+		}
+		if(streak){
+			await MySQL.realizarQuery(`UPDATE Estadistica SET 
+			streak = ${req.body.streak} WHERE id = ${req.body.userid};`)
+		}
+		if(points_lost){
+			await MySQL.realizarQuery(`UPDATE Estadistica SET 
+			points_lost = ${req.body.points_lost} WHERE id = ${req.body.userid};`)
+		}
+		if(cant_items){
+			await MySQL.realizarQuery(`UPDATE Estadistica SET 
+			cant_items = ${req.body.cant_items} WHERE id = ${req.body.userid};`)
+		}
+		res.send({message: "Estadística actualizada"})
+} catch (error) {
+	console.log('Error:', error.message)
+	res.status(500).send({
+		message: "Error al actualizar la estadística"
+	});
+}
+});
+
 
 
 app.put('/onactive', async function(req, res){
