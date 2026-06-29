@@ -7,29 +7,47 @@
     <link rel="stylesheet" href="styles.css">
 
 </head>
-<body>
-    <h1>Blackjack</h1>
+<body id="home">
+    <div id="title">
+            <h1>Blackjack</h1>
+
+    </div>
+    <section id="buttons">
+ <div id="lr">
      <button onclick="handleSignup()">
         Registro
     </button>
     <button onclick="handleLogin()">
         Login
     </button>
-    <button id="iniciar" onclick="handleir()">Jugar</button>
-    <button>
+    </div>
+<div id="btnjugar">
+        <button id="iniciar" onclick="handleir()">Jugar</button>
+
+</div>
+    <div id="tr">
+         <button>
         Tienda
     </button>
   <button>
         Ranking
     </button>
+    </div>
+
+    </section>
+   
+   
 
     
     
     <dialog id="dialogpoints">
-  <p id="ppoints">Seleccione cuantos puntos quiere apostar</p>
-  <p>Tus puntos: <span  id="showuserpoints"></span></p>
+  <h2 id="ppoints">Seleccione cuántos puntos quiere apostar</h2>
+  <div id="pi">
+     <p>Tus puntos: <span  id="showuserpoints"></span></p>
   <input type="number" id="inputpoints">
-  <button id="confirmpoints" >Enviar</button>
+  </div>
+ 
+  <button id="confirmpoints" class="btndialog" >Enviar</button>
     </dialog>
 
     <script src="fetch.js"></script>
