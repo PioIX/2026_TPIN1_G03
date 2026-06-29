@@ -16,7 +16,7 @@ class Blackjack{
 
     givedealcard() {
     let dealtemp=this.cards[Math.floor(Math.random() * this.cards.length)]
-    this.dealcards.push(dealtemp)
+    this.dealcards.push([dealtemp,Math.random()>=0.5])
     if (dealtemp=="A"){
         this.dealsum+=11
         this.ace11deal=true
@@ -32,7 +32,7 @@ class Blackjack{
 
     giveusercard(){
     let usertemp=this.cards[Math.floor(Math.random() * this.cards.length)]
-    this.usercards.push(usertemp)
+    this.usercards.push([usertemp,Math.random()>=0.5])
     if (usertemp=="A"){
         this.usersum+=11
         this.ace11user=true
@@ -56,9 +56,9 @@ class Blackjack{
             
         }
         
-        console.log(`Dealer: ${this.dealcards}`)
+        console.log(`Dealer: ${this.dealcards[0]}`)
         console.log(`Suma: ${this.dealsum}`)
-        console.log(`User: ${this.usercards}`)
+        console.log(`User: ${this.usercards[0]}`)
         console.log(`Suma: ${this.usersum}`)
     
             if (this.usersum>21){
@@ -84,9 +84,9 @@ class Blackjack{
 
           
         
-        console.log(`Dealer: ${this.dealcards}`)
+        console.log(`Dealer: ${this.dealcards[0]}`)
         console.log(`Suma: ${this.dealsum}`)
-        console.log(`User: ${this.usercards}`)
+        console.log(`User: ${this.usercards[0]}`)
         console.log(`Suma: ${this.usersum}`)
         
   

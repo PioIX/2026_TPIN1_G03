@@ -1,23 +1,38 @@
 let juego = {};
 let winpoints=1
-UserLogged= new Usuario(1)
+tempuser=JSON.parse(sessionStorage.getItem("User"))
+UserLogged= new Usuario(tempuser.id)  
 
 
-
-const cartasref = [
-  "1",
-  "2",
-  "3",
-  "img/c4.png",
-  "5",
-  "6",
-  "7",
-  "8",
-  "9",
-  "10",
-  "J",
-  "Q",
-  "K",
+const cartasrefP = [
+  "img/cartas/AV.png",
+  "img/cartas/2V.png",
+  "img/cartas/3V.png",
+  "img/cartas/4V.png",
+  "img/cartas/5V.png",
+  "img/cartas/6V.png",
+  "img/cartas/7V.png",
+  "img/cartas/8V.png",
+  "img/cartas/9V.png",
+  "img/cartas/10V.png",
+  "img/cartas/JV.png",
+  "img/cartas/QV.png",
+  "img/cartas/KV.png",
+];
+const cartasrefD = [
+  "img/cartas/A0.png",
+  "img/cartas/20.png",
+  "img/cartas/30.png",
+  "img/cartas/40.png",
+  "img/cartas/50.png",
+  "img/cartas/60.png",
+  "img/cartas/70.png",
+  "img/cartas/80.png",
+  "img/cartas/90.png",
+  "img/cartas/100.png",
+  "img/cartas/J0.png",
+  "img/cartas/Q0.png",
+  "img/cartas/K0.png",
 ];
 const buttonhit = document.getElementById("buttonhit");
 const buttonstand = document.getElementById("buttonstand");
@@ -58,10 +73,17 @@ function actualizarUser() {
   let carta = 0;
   document.getElementById("cartasuser").innerHTML=`<div id="cartasuser"></div>`
   for (i = 0; i < juego.usercards.length; i++) {
-    carta = juego.cards.indexOf(juego.usercards[i]);
+    carta = juego.cards.indexOf(juego.usercards[i][0]);
+    if (juego.usercards[i][1]){
     document.getElementById("cartasuser").innerHTML +=
-      `<img src="${cartasref[carta]}" alt="${juego.cards[carta]}">
-`;
+          `<img src="${cartasrefP[carta]}" alt="${juego.cards[carta]}">
+    `;
+    }else{
+      document.getElementById("cartasuser").innerHTML +=
+          `<img src="${cartasrefD[carta]}" alt="${juego.cards[carta]}">
+    `;
+    }
+    
   
   }
   document.getElementById("sumauser").innerText=juego.usersum
@@ -71,10 +93,17 @@ function actualizarDealer() {
       document.getElementById("cartasdealer").innerHTML=`<div id="cartasdealer" class="cartas"></div>`
 
   for (i = 0; i < juego.dealcards.length; i++) {
-    carta = juego.cards.indexOf(juego.dealcards[i]);
-    document.getElementById("cartasdealer").innerHTML +=
-      `<img src="${cartasref[carta]}" alt="${juego.cards[carta]}">
+    carta = juego.cards.indexOf(juego.dealcards[i][0]);
+    if (juego.dealcards[i][1]){
+      document.getElementById("cartasdealer").innerHTML +=
+      `<img src="${cartasrefP[carta]}" alt="${juego.cards[carta]}">
 `;
+    }else{
+      document.getElementById("cartasdealer").innerHTML +=
+      `<img src="${cartasrefD[carta]}" alt="${juego.cards[carta]}">
+`;
+    }
+    
   }
     document.getElementById("sumadealer").innerText=juego.dealsum
 
@@ -145,7 +174,7 @@ async function win(){
   winpoints=sessionStorage.getItem("winpoints")
   console.log(winpoints)
   console.log(UserLogged)
-  UserLogged.points+=winpoints
+  UserLogged.points+=parseInt(winpoints)
   console.log(UserLogged)
   await putPoints(UserLogged.points,UserLogged.id)
   const modal = document.getElementById("win");
@@ -157,7 +186,7 @@ async function win(){
 
 async function lose(){
   winpoints=sessionStorage.getItem("winpoints")
-  UserLogged.points-=winpoints
+  UserLogged.points-=parseInt(winpoints)
   console.log(UserLogged)
   
   await putPoints(UserLogged.points,UserLogged.id)

@@ -45,8 +45,9 @@ async function handleLogin(){
             respuestaPassword = prompt("La contraseña no es correcta. Vuelva a intentar...")
         }
         alert("Login exitoso!")
-        UserLogged == new Usuario(leerUsername.id)
+        UserLogged = new Usuario(leerUsername[valorPosicion].id)
         UserLogged.updateuser()
+        sessionStorage.setItem("User",JSON.stringify(UserLogged))
     } else {
         alert("Usuario no encontrado. Vuelva a intentarlo.")
     }
