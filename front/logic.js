@@ -37,6 +37,6 @@ function tryAdmin() {
     } else if (UserLogged.is_admin == false) {
         alert("Este usuario no cuenta con privilegios de administracion.")
     } else {
-        alert("Error!")
+        alert("No hay usuario logueado.")
     }
 }
