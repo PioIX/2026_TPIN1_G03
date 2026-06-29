@@ -30,6 +30,7 @@ async function getUsuarioporUsername(user) {
 }
 
 
+
 async function getRanking() {
     try {
       let res = await fetch("http://localhost:4000/Ranking") 
