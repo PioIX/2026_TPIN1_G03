@@ -132,17 +132,25 @@ dialog{
         justify-self: center;
     }
 }
-.cardsec{
+#cardsec{
     display: flex;
-
+    flex-direction: column;
+    gap: 3rem;
 }
 .infp{
     margin-right: 5rem;
-    align-self: center;
     font-size: 32px;
 }
-#infdealer{
-    margin-right: 3.1rem;
 
+#game{
+    display: flex;
+    margin-top: 4rem;
+}
+#pss{
+    display: flex;
+    flex-direction: column;
+    justify-items: left;
+    align-items: flex-start;
+    vertical-align: center;
 }
 /*Falta terminar diseño de juego y todo el resto */
