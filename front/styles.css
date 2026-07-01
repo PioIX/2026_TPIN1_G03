@@ -4,13 +4,18 @@ botones (naranja)- #8f534c
 gris- #343232
 gris claro - #585757
 
-
+fuentes:
+font-family: "Tiny5", sans-serif;
+font-family: "Jersey 10", sans-serif;
+  font-family: "Jacquard 12", system-ui;
 */
 
 /*GENERAL*/
 *{
         box-sizing: border-box;
     margin: 0px;
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 300;
 }
 
 dialog{
@@ -27,7 +32,14 @@ dialog{
         background-color: #8f534c;
     }
 }
+
+
+
+
+
+
 /*INDEX*/
+
 #home{
     background-color: #236749;
     align-items: center;
@@ -37,7 +49,9 @@ dialog{
 #title{
     margin: 5rem;
     margin-top: 10rem;
-    font-size: 80px;
+    font-size: 100px;
+    font-family: "Jacquard 12", system-ui;
+
     
 }
 #buttons{
@@ -47,6 +61,8 @@ dialog{
     align-content: center;
     button{
         background-color: #585757;
+            font-family: "Jersey 10", sans-serif;
+
     }
 }
 #lr{
@@ -56,6 +72,8 @@ dialog{
     button{
         height: 50px;
         width: 120px;
+        font-size: 25px;
+
     }
 }
 #tr{
@@ -65,6 +83,7 @@ dialog{
     button{
         height: 50px;
         width: 120px;
+        font-size: 25px;
     }
 
 
@@ -78,6 +97,7 @@ dialog{
     button{
         height: 100px;
         width: 220px;
+        font-size: 50px;
     }
     
 
@@ -104,13 +124,14 @@ dialog{
        border-bottom: 2px solid #343232;
         #showuserpoints{
             margin-left: 10px;
-            margin-right: 15rem;
+            margin-right: 14rem;
         }
         
     }
     button{
         height: 70px;
         width: 180px;
+        font-size: 32px;
     }
 
 }
@@ -136,21 +157,104 @@ dialog{
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    justify-self: center;
+    align-items: center;
+    width: auto;
+    overflow-wrap: break-word;
+    white-space: nowrap;
 }
 .infp{
     margin-right: 5rem;
-    font-size: 32px;
+    font-size: 50px;
 }
 
 #game{
-    display: flex;
-    margin-top: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+    justify-items: center;
 }
 #pss{
+    display: grid;
+    align-items: center;
+    margin-left: 6rem;
+    align-self: left;
+}
+#win{
+    h2{
+margin-left: 3rem;
+    margin-right: 3rem;
+     margin-bottom: 3rem;
+       font-size: 64px;
+       padding-bottom: 2rem;
+       text-align: center;
+       
+    }
+    p{
+        font-size: 32px;
+        margin-left: 3rem;
+
+
+    }
+}
+#lose{
+    h2{
+    margin-left: 3rem;
+    margin-right: 3rem;
+       margin-bottom: 3rem;
+       font-size: 64px;
+       padding-bottom: 2rem;
+        text-align: center;
+
+    }
+    p{
+        font-size: 32px;
+        margin-left: 3rem;
+    }
+}
+.dialgbtns{
+    margin-top: 3rem;
     display: flex;
-    flex-direction: column;
-    justify-items: left;
-    align-items: flex-start;
-    vertical-align: center;
+    justify-content: center;
+    gap: 3rem;
+    button{
+        height: 70px;
+        width: 180px;
+        font-size: 25px;
+
+    }
+}
+#juegoheader{
+    width: 100%;
+    margin-top: 1rem;
+    justify-content: left;
+    padding-left: 3rem;
+    button{
+        background-color: #8f534c;
+        height: 50px;
+        width: 70px;
+        
+    }
+}
+#hitstand{
+    display: flex;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    gap : 5rem;
+    margin-top: 3rem;
+    button{
+        height: 70px;
+        width: 180px;
+        font-size: 40px;
+    }
+    padding-bottom: 2rem;
+}
+#buttonhit{
+background-color: #8f534c;
+
+}
+#buttonstand{
+background-color: #585757;
 }
 /*Falta terminar diseño de juego y todo el resto */

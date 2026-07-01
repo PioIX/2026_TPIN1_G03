@@ -1,7 +1,11 @@
 let juego = {};
 let winpoints=1
-tempuser=JSON.parse(sessionStorage.getItem("User"))
-UserLogged= new Usuario(tempuser.id)  
+let tempuser=JSON.parse(sessionStorage.getItem("User"))
+if (tempuser!=null){
+  UserLogged= new Usuario(tempuser.id)  
+}else{
+  UserLogged={}
+  }
 
 
 const cartasrefP = [
@@ -39,35 +43,43 @@ const buttonstand = document.getElementById("buttonstand");
 window.addEventListener("load", iraljuego());
 
 async function handleir(){
-  await UserLogged.updateuser()
-  modal=document.getElementById("dialogpoints")
-  conf=document.getElementById("confirmpoints")
-  document.getElementById("showuserpoints").innerText=UserLogged.points
-  modal.showModal()
-  conf.addEventListener("click", () =>{
-  winpoints=document.getElementById("inputpoints").value
-    if ((UserLogged.points<winpoints && !(UserLogged.points==0 && winpoints==1)) || winpoints==0){
+  if (Object.keys(UserLogged).length === 0 || Object.keys(UserLogged).length === undefined || UserLogged === null){
+    document.getElementById("homeaviso").innerText="Inicie sesión para poder jugar"
+  }else{
+    await UserLogged.updateuser()
+    modal=document.getElementById("dialogpoints")
+    conf=document.getElementById("confirmpoints")
+    document.getElementById("showuserpoints").innerText=UserLogged.points
+    modal.showModal()
+    conf.addEventListener("click", () =>{
+    winpoints=document.getElementById("inputpoints").value
+    if ((UserLogged.points<winpoints && !(UserLogged.points<=0 && winpoints==1)) || winpoints==0){
       document.getElementById("ppoints").innerText="Seleccione una cantidad válida"
     }else{
       sessionStorage.setItem("winpoints",winpoints)
       window.location.href='juego.html';
     }
     
-  })
+    })
+  }
+  
   
 }
 async function iraljuego() {
+  
   UserLogged.updateuser()
   console.log(UserLogged)
   console.log("points: ")
   console.log(sessionStorage.getItem("winpoints"))
-  console.log("juego");
+  console.log("juego"); 
   juego = new Blackjack();
   juego.givedealcard();
   actualizarDealer();
   juego.giveusercard();
   actualizarUser();
 }
+
+
 
 function actualizarUser() {
   let carta = 0;
@@ -116,13 +128,11 @@ async function hit() {
 
    if (res==1){
       console.log("w")
-      document.getElementById("aviso").innerText = "Ganaste!";
       turn=false
       await win()
        
     }else{if(res==-1){
       console.log("l")
-      document.getElementById("aviso").innerText = "Perdiste";
       turn=false
       await lose()
     }
@@ -139,13 +149,11 @@ async function stand(){
     console.log(res)
     if (res==1){
       console.log("w")
-      document.getElementById("aviso").innerText = "Ganaste!";
       turn=false
       await win()
        
     }else{if(res==-1){
       console.log("l")
-      document.getElementById("aviso").innerText = "Perdiste";
       turn=false
       await lose()
     }
@@ -161,7 +169,9 @@ async function stand(){
 }
 function replay(){
   winpoints=sessionStorage.getItem("winpoints")
-   if ((UserLogged.points<winpoints && !(UserLogged.points==0 && winpoints==1)) || winpoints==0){
+   if ((UserLogged.points<winpoints && !(UserLogged.points<=0 && winpoints==1)) || winpoints==0){
+    document.getElementById("avisonopoints").innerText="No puede continuar con la misma apuesta. Vuelva y seleccione una nueva cantidad."
+
  //mostrar modal que dice que no se puede continuar con la misma apuesta
    }else{
     window.location.reload();

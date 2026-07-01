@@ -48,6 +48,7 @@ async function handleLogin(){
         UserLogged = new Usuario(leerUsername[valorPosicion].id)
         UserLogged.updateuser()
         sessionStorage.setItem("User",JSON.stringify(UserLogged))
+        window.location.reload()
     } else {
         alert("Usuario no encontrado. Vuelva a intentarlo.")
     }
