@@ -18,13 +18,18 @@
     </button>
 
     <!-- elimina usuarios -->
-    <button onclick="borrarUser()">
+    <button onclick="borrarUser()"> <!-- hehco -->
         Eliminar
     </button>
 
     <!-- designa admins -->
-    <button onclick="adminUser()">
+    <button onclick="adminUser()"> <!-- hecho -->
         Designar como administrador
+    </button>
+
+    <!-- descarta admins -->
+    <button onclick="adminUserNon()"> <!-- hecho -->
+        Descartar como administrador
     </button>
 
     <!-- ajusta puntos -->
@@ -32,32 +37,37 @@
         Modificar puntaje
     </button>
 
-    <!-- ajusta items -->
-    <button onclick="modItemsUser()">
-        Modificar items
+    <!-- añade items a un usuario -->
+    <button onclick="addItemUser()"> <!-- pendiente / revisar -->
+        Añadir items
     </button>
 
 
     <h2>Items</h2>
 
     <!-- muestra items -->
-    <button onclick="verItems()">
+    <button onclick="verItems()"> <!-- hecho -->
         Ver
     </button>
 
     <!-- crea un item -->
-    <button onclick="creaItem()">
+    <button onclick="creaItem()"> <!-- pendiente / revisar -->
         Crear
     </button>
 
-    <!-- modifica un item -->
-    <button onclick="modItem()">
-        Modificar
+    <!-- borra un item -->
+    <button onclick="borrarItem()"> <!-- hecho -->
+        Borrar
     </button>
 
-    <!-- borra un item -->
-    <button onclick="borrarItem()">
-        Borrar
+    <!-- modifica imagen de item -->
+    <button onclick="modItemImage()">
+        Modificar imagen
+    </button>
+
+    <!-- modifica precio de item -->
+    <button onclick="modItemPrice()"> <!-- hecho -->
+        Modificar precio
     </button>
 
 
@@ -69,18 +79,30 @@
     </button>
 
     <!-- todos los items para un usuario -->
-    <button onclick="cheatItems()">
+    <button onclick="cheatItems()"> <!-- hecho -->
         Dar todos los items
     </button>
 
-    <script src="admin.js"></script>
+
+    <h2>Tablas</h2>
+
+    <div class="divTabla">
+        <table id="ListaDeUsers">
+        </table>
+    </div>
+
+    <div class="divTabla">
+        <table id="ListaDeItems">
+        </table>
+    </div>
+
+    <script src="usuarios.js"></script>
+    <script src="items.js"></script>
     <script  src="fetch.js"></script>
+    <script src="admin.js"></script>
 </body>
 </html>
 
-<!-- Carga datos cuando quiere, administrar usuarios, añade o quita puntos -->
-
-<div class="divTabla">
-    <table id="ListaDeUsers">
-    </table>
-</div>
+// a todos les falta que el dato reemplace al original.
+// los items requieren estructura para comprobar si existen sus IDs
+// todos los variable == undefined tienen que hacerse con coincidencia, que debe terminarse
