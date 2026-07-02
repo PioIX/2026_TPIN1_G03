@@ -103,6 +103,10 @@ dialog{
 
 }
 
+#homeaviso{
+    font-size: 32px;
+    margin-top: 1rem;
+}
 #dialogpoints{
     
     h2{
@@ -257,4 +261,49 @@ background-color: #8f534c;
 #buttonstand{
 background-color: #585757;
 }
-/*Falta terminar diseño de juego y todo el resto */
+
+
+
+
+/*RANKING */
+#ranking{
+    background-color: #236749;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    
+}
+#titlerank{
+    width: 100%;
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 64px;
+}
+#tablerank{
+    align-self: center;
+    justify-self: center;
+    font-size: 60px;
+    height: 500px;
+}
+#divtable{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+        margin-top: 2rem;
+    margin-bottom: 5rem;
+}
+#btnleave{
+    justify-self: center;
+    align-self: center;
+    button{
+    height: 100px;
+    width: 220px;
+    font-size: 50px;
+    }
+    
+    
+}

@@ -82,26 +82,27 @@ class Blackjack{
   
         this.givedealcard()
 
-          
-        
+        setTimeout(() => {    
+    
         console.log(`Dealer: ${this.dealcards[0]}`)
         console.log(`Suma: ${this.dealsum}`)
         console.log(`User: ${this.usercards[0]}`)
         console.log(`Suma: ${this.usersum}`)
-        
-  
-            if (this.dealsum>21){
-                console.log("Ganaste!")
-                return 1
-            }else{
-            if((this.dealsum>this.usersum && this.dealsum<21) || this.dealsum==21){
-                console.log("Perdiste")
-                return -1
-            }else{
-                return 0
-            }
     
-            }
+    
+        if (this.dealsum>21){
+            console.log("Ganaste!")
+            return 1
+        }else{
+        if((this.dealsum>this.usersum && this.dealsum<21) || this.dealsum==21){
+            console.log("Perdiste")
+            return -1
+        }else{
+            return 0
+        }
+    
+        }
+}, 1000);
 
         
         
