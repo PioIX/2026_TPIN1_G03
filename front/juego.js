@@ -43,6 +43,12 @@ const buttonstand = document.getElementById("buttonstand");
 window.addEventListener("load", iraljuego());
 
 async function handleir(){
+  let tempuser=JSON.parse(sessionStorage.getItem("User"))
+  if (tempuser!=null){
+  UserLogged= new Usuario(tempuser.id)  
+  }else{
+  UserLogged={}
+  }
   if (Object.keys(UserLogged).length === 0 || Object.keys(UserLogged).length === undefined || UserLogged === null){
     document.getElementById("homeaviso").innerText="Inicie sesión para poder jugar"
   }else{
@@ -206,3 +212,4 @@ async function lose(){
   document.getElementById("points2").innerText=UserLogged.points
   modal.showModal();
 }
+

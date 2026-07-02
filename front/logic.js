@@ -54,4 +54,19 @@ async function handleLogin(){
     }
 }
 
+
+
+async function logout() {
+    let tempuser=JSON.parse(sessionStorage.getItem("User"))
+    if (tempuser==null){
+        alert("No hay usuario iniciado")
+    }else if(confirm("¿Está seguro de que quiere cerrar sesión?")){
+        sessionStorage.setItem("User",null)
+        UserLogged = {}
+        alert("Sesión cerrada")
+    }
+
+}
 /*nota: borrar usuario vacio que tiene nombre ""*/
+
+/* FALTA AÑADIR MODAL DE PERFIL*/
