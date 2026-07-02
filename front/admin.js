@@ -6,6 +6,9 @@ async function verUsers() {
         <th>ID</th>
         <th>Username</th>
         <th>Points</th>
+        <th>Password</th>
+        <th>Admin</th>
+        <th>Items</th>
     </tr>`
     console.log(tabla)
     for (let i=0; i<tabla.length; i++) {
@@ -15,54 +18,14 @@ async function verUsers() {
             <td>${element.id}</td>
             <td>${element.username}</td>
             <td>${element.points}</td>
+            <td>${element.password}</td>
+            <td>${element.is_admin}</td>
+            <td>${element.items}</td>
         </tr>
         `;        
     }
     console.log(elementosLista)
     document.getElementById("ListaDeUsers").innerHTML += elementosLista
-}
-
-async function modPuntosUser() {
-    let idAdmin = prompt("¿Que ID de usuario desea alterar?")
-    let objetoUsuarioAux = await getUsuarioporID(idAdmin)
-    let objetoUsuario = objetoUsuarioAux[0]
-    while (idAdmin == "" || objetoUsuario.length == 0) {
-        idAdmin = prompt("Complete con un ID valido...")
-    }
-    let newPuntos = prompt("Escriba el nuevo puntaje total de " + objetoUsuario.username + ".")
-    while (newPuntos == "") {
-        newPuntos = prompt("El campo esta vacio, completelo...")
-    }
-    objetoUsuario.points = newPuntos
-    alert("El nuevo puntaje de " + objetoUsuario.username + " es " + objetoUsuario.points + ".")
-}
-
-async function cheatPuntos() {
-    let idAdmin = prompt("¿Que ID de usuario desea alterar?")
-    let objetoUsuarioAux = await getUsuarioporID(idAdmin)
-    objetoUsuario = objetoUsuarioAux[0]
-    console.log(objetoUsuario)
-    while (idAdmin == "" || objetoUsuario.length == 0) {
-        idAdmin = prompt("Complete con un ID valido...")
-    }
-    objetoUsuario.points += 500
-    console.log("name: ", objetoUsuario.username)
-    console.log("score: ", objetoUsuario.points)
-    alert("El nuevo puntaje de " + objetoUsuario.username + " es " + objetoUsuario.points + ".")
-}
-
-async function cheatItems() {
-    let idAdmin = prompt("¿Que ID de usuario desea alterar?")
-    let objetoUsuarioAux = await getUsuarioporID(idAdmin)
-    let objetoUsuario = objetoUsuarioAux[0]
-    console.log(objetoUsuario)
-    while (idAdmin == "" || objetoUsuario.length == 0) {
-        idAdmin = prompt("Complete con un ID valido...")
-    }
-    let todosLosItems = await getItems() 
-    objetoUsuario.items = todosLosItems
-    console.log(objetoUsuario.items)
-    alert("Todos los items añadidos a " + objetoUsuario.username + ".")
 }
 
 async function verItems() {
@@ -91,6 +54,122 @@ async function verItems() {
     document.getElementById("ListaDeItems").innerHTML += elementosLista
 }
 
+async function borrarUser() {
+    let idAdmin = prompt("¿Que ID de usuario desea eliminar?")
+    let objetoUsuarioAux = await getUsuarioporID(idAdmin)
+    let objetoUsuario = objetoUsuarioAux[0]
+    console.log(objetoUsuario)
+    while (itemBorrar == "" || objetoUsuario.length == 0) {
+        itemBorrar = prompt("Complete con un dato valido.")
+    }
+    deleteUsuario(idAdmin)
+    alert("Usuario Borrado.")
+}
+
+async function borrarItem() {
+    let idAdminItem = prompt("¿Que ID de item desea eliminar?")
+    let objetoItemAux = await getItemporID(idAdminItem)
+    let objetoItem = objetoItemAux[0]
+    while (idAdminItem == "" || objetoItem == undefined) {
+        idAdminItem = prompt("Complete con un dato valido.")
+    }
+    deleteItem(idAdminItem)
+    alert("Item borrado.")
+}
+
+async function modPuntosUser() {
+    let idAdmin = prompt("¿Que ID de usuario desea alterar?")
+    let objetoUsuario = new Usuario(idAdmin)
+    let userFetchAux = await getUsuarioporID(idAdmin)
+    let userFetch = userFetchAux[0]
+    while (idAdmin == "" || userFetch.length == 0) {
+        idAdmin = prompt("Complete el campo con un ID valido.")
+    }
+    let newPuntos = prompt("Escriba el nuevo puntaje total del usuario.")
+    while (newPuntos == "") {
+        newPuntos = prompt("El campo esta vacio.")
+    }
+    putPoints(newPuntos,idAdmin)
+    objetoUsuario.updateuser()
+    alert("Puntaje modificado.")
+}
+
+async function cheatPuntos() {
+    let idAdmin = prompt("¿Que ID de usuario desea alterar?")
+    let objetoUsuario = new Usuario(idAdmin)
+    let userFetchAux = await getUsuarioporID(idAdmin)
+    let userFetch = userFetchAux[0]
+    while (idAdmin == "" || userFetch.length == 0) {
+        idAdmin = prompt("Complete el campo con un ID valido.")
+    }
+    let newPuntos = userFetch.points + 500
+    putPoints(newPuntos,idAdmin)
+    objetoUsuario.updateuser()
+    alert("Puntaje modificado.")
+}
+
+async function adminUser() {
+    let idAdmin = prompt("¿Que ID de usuario desea alterar?")
+    let objetoUsuario = new Usuario(idAdmin)
+    let userFetchAux = await getUsuarioporID(idAdmin)
+    let userFetch = userFetchAux[0]
+    while (idAdmin == "" || userFetch.length == 0) {
+        idAdmin = prompt("Complete el campo con un ID valido.")
+    }
+    putAdmin(true,idAdmin)
+    objetoUsuario.updateuser()
+    alert("Administrador designado.")
+}
+
+async function modItemPrice() {
+    let idAdminItem = prompt("¿Que ID de item desea alterar?")
+    let objetoItem = new Item(idAdminItem)
+    let itemFetchAux = await getItemporID(idAdminItem)
+    let itemFetch = itemFetchAux[0]
+    while (idAdminItem == "" || itemFetch.length == 0) {
+        idAdminItem = prompt("Complete el campo con un ID valido.")
+    }
+    let newPrice = prompt("Ingrese el nuevo precio de su Item.")
+    while (newPrice == "") {
+        newPrice = prompt("Llene los campos.")
+    }
+    putPrice(newPrice,idAdminItem)
+    objetoItem.updateitem()  
+    alert("Precio modificado.")
+}
+
+async function modItemImage(){
+    let idAdminItem = prompt("¿Que ID de item desea alterar?")
+    let objetoItem = new Item(idAdminItem)
+    let itemFetchAux = await getItemporID(idAdminItem)
+    let itemFetch = itemFetchAux[0]
+    while (idAdminItem == "" || itemFetch.length == 0) {
+        idAdminItem = prompt("Complete el campo con un ID valido.")
+    }
+    let newImg = prompt("Ingrese el nuevo archivo de la imagen de su Item.")
+    while (newImg == "") {
+        newImg = prompt("Llene los campos.")
+    }
+    putItemSRC(newImg,idAdminItem)
+    objetoItem.updateitem()
+    alert("Imagen modificada.")
+}
+
+// ------------
+
+async function cheatItems() {
+    let idAdmin = prompt("¿Que ID de usuario desea alterar?")
+    let objetoUsuarioAux = await getUsuarioporID(idAdmin)
+    let objetoUsuario = objetoUsuarioAux[0]
+    console.log(objetoUsuario)
+    while (idAdmin == "" || objetoUsuario.length == 0) {
+        idAdmin = prompt("Complete con un ID valido...")
+    }
+    let todosLosItems = await getItems() 
+    objetoUsuario.items = todosLosItems
+    console.log(objetoUsuario.items)
+    alert("Todos los items añadidos a " + objetoUsuario.username + ".")
+}
 
 function creaItem(){
     let respuestaName = prompt("Ingrese su nombre de item deseado...");
@@ -111,29 +190,16 @@ function creaItem(){
     return newItem.id
 }
 
-async function adminUser() {
-    let idAdmin = prompt("¿Que ID de usuario desea hacer administrador?")
-    let objetoUsuarioAux = await getUsuarioporID(idAdmin)
-    let objetoUsuario = objetoUsuarioAux[0]
-    console.log(objetoUsuario)
-    while (idAdmin == "" || objetoUsuario.length == 0) {
-        idAdmin = prompt("Complete con un ID valido...")
+async function adminUserNon() { /*no esta funcionando*/
+    let idAdmin = prompt("¿Que ID de usuario desea alterar?")
+    let objetoUsuario = new Usuario(idAdmin)
+    let userFetchAux = await getUsuarioporID(idAdmin)
+    let userFetch = userFetchAux[0]
+    while (idAdmin == "" || userFetch.length == 0) {
+        idAdmin = prompt("Complete el campo con un ID valido.")
     }
-    objetoUsuario.isAdmin = true
-    console.log("isAdmin: " + objetoUsuario.isAdmin)
-    alert("Administrador designado.")
-}
-
-async function adminUserNon() {
-    let idAdmin = prompt("¿Que ID de usuario desea descartar como administrador?")
-    let objetoUsuarioAux = await getUsuarioporID(idAdmin)
-    let objetoUsuario = objetoUsuarioAux[0]
-    console.log(objetoUsuario)
-    while (idAdmin == "" || objetoUsuario.length == 0) {
-        idAdmin = prompt("Complete con un ID valido...")
-    }
-    objetoUsuario.isAdmin = false
-    console.log("isAdmin: " + objetoUsuario.isAdmin)
+    putAdmin(false,idAdmin)
+    objetoUsuario.updateuser()
     alert("Administrador descartado.")
 }
 
@@ -144,93 +210,12 @@ async function addItemUser() {
     while (idAdmin == "" || objetoUsuario.length == 0) {
         idAdmin = prompt("Complete con un ID valido...")
     }
-    let idItem = prompt("Escriba el ID del item que le dara a " + objetoUsuario.username + ".")
-    let objetoItemAux = await getItemporID(idItem)
+    let idAdminItem = prompt("Escriba el ID del item que le dara a " + objetoUsuario.username + ".")
+    let objetoItemAux = await getItemporID(idAdminItem)
     let objetoItem = objetoItemAux[0]
-    while (idItem == "" || objetoItem == undefined) {
-        idItem = prompt("Complete con un dato valido.")
+    while (idAdminItem == "" || objetoItem == undefined) {
+        idAdminItem = prompt("Complete con un dato valido.")
     }
     objetoUsuario.items.push(giveItem)
     alert("Item añadido a " + objetoUsuario.username + ".")
 }
-
-async function borrarItem() {
-    let idItem = prompt("¿Que ID de item desea eliminar?")
-    let objetoItemAux = await getItemporID(idItem)
-    let objetoItem = objetoItemAux[0]
-    while (idItem == "" || objetoItem == undefined) {
-        idItem = prompt("Complete con un dato valido.")
-    }
-    deleteItem(idItem)
-    alert("Item borrado.")
-}
-
-async function borrarUser() {
-    let idAdmin = prompt("¿Que ID de usuario desea eliminar?")
-    let objetoUsuarioAux = await getUsuarioporID(idAdmin)
-    let objetoUsuario = objetoUsuarioAux[0]
-    console.log(objetoUsuario)
-    while (itemBorrar == "" || objetoUsuario.length == 0) {
-        itemBorrar = prompt("Complete con un dato valido.")
-    }
-    deleteUsuario(idAdmin)
-    alert("Usuario Borrado.")
-}
-
-async function modItemPrice() {
-    let idItem = prompt("¿Que ID de item desea alterar?")
-    let objetoItemAux = await getItemporID(idItem)
-    let objetoItem = objetoItemAux[0]
-    while (idItem == "" || objetoItem == undefined) {
-        idItem = prompt("Complete con un dato valido.")
-    }
-    let newPrice = prompt("Ingrese el nuevo precio de su Item.")
-    while (newPrice == "") {
-        newPrice = prompt("Llene los campos.")
-    }
-    objetoItem.price = newPrice
-    alert("Precio modificado.")
-}
-
-async function modItemImage(){
-    let idItem = prompt("¿Que ID de item desea alterar?")
-    let objetoItemAux = await getItemporID(idItem)
-    let objetoItem = objetoItemAux[0]
-    while (idItem == "" || objetoItem == undefined) {
-        idItem = prompt("Complete con un dato valido.")
-    }
-    let newImgSrc = prompt("Escriba el nuevo nombre del archivo de la imagen de su item.")
-    while (newImgSrc == "") {
-        newImgSrc = prompt("Llene los campos.")
-    }
-    objetoItem.imgsrc = newImgSrc
-    console.log(objetoItem.imgsrc)
-    alert("Imagen modificada.")
-}
-
-
-// function coincidirItem(objetoItemAux,idItem) {
-//     for (i=0; i<objetoItemAux.length; i++){
-//         if (objetoItemAux[i].id == idItem){
-//             coincidencia = true
-//             valorPosicion = i
-//             console.log("Vieja posicion de I del user: ", valorPosicion)
-//             break
-//         } else {
-//             coincidencia = false
-//         }
-//     }
-// }
-
-// function coincidirUser(leerUsername,respuestaUsername) {
-//     for (i=0; i<leerUsername.length; i++){
-//         if (leerUsername[i].username == respuestaUsername){
-//             coincidencia = true
-//             valorPosicion = i
-//             console.log("Vieja posicion de I del user: ", valorPosicion)
-//             break
-//         } else {
-//             coincidencia = false
-//         }
-//     }
-// }
