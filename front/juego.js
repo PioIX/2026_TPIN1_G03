@@ -245,7 +245,7 @@ async function showstats() {
 
   document.getElementById("statwins").innerText=stats.wins
   document.getElementById("statlosses").innerText=stats.losses
-  document.getElementById("statstreak").innerText=stats.streak
+  document.getElementById("statstreak").innerText=stats.streak-1
 document.getElementById("statplayed").innerText=stats.played
 document.getElementById("statlostpoints").innerText=stats.points_lost
 document.getElementById("statitems").innerText=stats.cant_items
