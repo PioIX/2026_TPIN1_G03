@@ -16,7 +16,7 @@
         <button id="btnlogout"onclick="logout()">
             Logout
         </button>
-    <button id="btnprofile">
+    <button id="btnprofile" onclick="showstats()">
     Perfil
     </button>
     </header>
@@ -62,7 +62,24 @@
   <button id="confirmpoints" class="btndialog" >Enviar</button>
     </dialog>
 
-    /* FALTA AÑADIR MODAL DE PERFIL*/
+
+<dialog id="dialoguser">
+  <h2>Usuario: <span id="h2user"></span></h2>
+  <div id="stats">
+     <p>Puntos: <span  id="statpoints"></span></p>
+     <p>Partidas ganadas: <span  id="statwins"></span></p>
+     <p>Partidas perdidas: <span  id="statlosses"></span></p>
+     <p>Partidas jugadas: <span  id="statplayed"></span></p>
+     <p>Puntos perdidos: <span  id="statlostpoints"></span></p>
+     <p>Racha: <span  id="statstreak"></span></p>
+     <p>Cantidad de items: <span  id="statitems"></span></p>
+
+  </div>
+ 
+  <button id="statreturn" class="btndialog" onclick="window.location.reload()">Volver</button>
+    </dialog>
+
+
 
     <script src="fetch.js"></script>
     <script src="usuarios.js"></script>

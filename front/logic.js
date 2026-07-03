@@ -31,6 +31,7 @@ async function handleSignup(){
     alert("Registro exitoso!")
     let newUsuario = new Usuario(leerUsername.id)
     postUsuario(newUsuario)
+    postEstadistica(newUsuario.id)
     return newUsuario.id
 }
 

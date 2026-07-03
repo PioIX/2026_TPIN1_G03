@@ -1,3 +1,5 @@
+
+
 let juego = {};
 let winpoints=1
 let tempuser=JSON.parse(sessionStorage.getItem("User"))
@@ -188,6 +190,17 @@ function replay(){
 
 async function win(){
   winpoints=sessionStorage.getItem("winpoints")
+  estad= await getEstadistica(UserLogged.id)
+  newestad={
+    userid:UserLogged.id,
+    wins:estad.wins+1,
+    losses:estad.losses,
+    played:estad.played+1,
+    streak:estad.streak+1,
+    points_lost:estad.points_lost,
+    cant_items:estad.cant_items
+  }
+  await putEstadistica(newestad)
   console.log(winpoints)
   console.log(UserLogged)
   UserLogged.points+=parseInt(winpoints)
@@ -200,11 +213,22 @@ async function win(){
   modal.showModal();
 }
 
+
 async function lose(){
   winpoints=sessionStorage.getItem("winpoints")
   UserLogged.points-=parseInt(winpoints)
   console.log(UserLogged)
-  
+  estad= await getEstadistica(UserLogged.id)
+  newestad={
+    userid:UserLogged.id,
+    wins:estad.wins,
+    losses:estad.losses+1,
+    played:estad.played+1,
+    streak:1,
+    points_lost:estad.points_lost+winpoints,
+    cant_items:estad.cant_items
+  }
+  await putEstadistica(newestad)
   await putPoints(UserLogged.points,UserLogged.id)
   const modal = document.getElementById("lose");
   document.getElementById("sumadealer2").innerText=juego.dealsum
@@ -213,3 +237,18 @@ async function lose(){
   modal.showModal();
 }
 
+async function showstats() {
+  modal=document.getElementById("dialoguser")
+  stats= await getEstadistica(UserLogged.id)
+  document.getElementById("h2user").innerText=UserLogged.username
+    document.getElementById("statpoints").innerText=UserLogged.points
+
+  document.getElementById("statwins").innerText=stats.wins
+  document.getElementById("statlosses").innerText=stats.losses
+  document.getElementById("statstreak").innerText=stats.streak
+document.getElementById("statplayed").innerText=stats.played
+document.getElementById("statlostpoints").innerText=stats.points_lost
+document.getElementById("statitems").innerText=stats.cant_items
+  modal.showModal();
+
+}

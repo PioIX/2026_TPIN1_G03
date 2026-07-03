@@ -155,7 +155,32 @@ dialog{
 
 }
 
-
+#dialoguser{
+    h2{
+    margin: 2rem;
+       margin-bottom: 3rem;
+       font-size: 64px;
+       padding-bottom: 2rem;
+       border-bottom: 2px solid #343232;
+;
+       
+    }
+    
+    p{
+        font-size: 25px;
+        text-align: left;
+        justify-self: center;
+    }
+    button{
+        margin-top: 2rem;
+        height: 50px;
+        width: 150px;
+        font-size: 32px;
+    }
+    span{
+        color: black;
+    }
+}
 
 
 
@@ -304,10 +329,15 @@ background-color: #585757;
     border-spacing: 150px 20px;
 
 }
+
+tr:nth-child(even) {
+  background-color: black;
+}
 thead th{
   position: sticky;
   top: 0;
   z-index: 1;
+  background-color: #236749;
 }
 #divtable{
     display: flex;
