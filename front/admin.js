@@ -155,6 +155,36 @@ async function modItemImage(){
     alert("Imagen modificada.")
 }
 
+
+async function creaItem(){
+    let respuestaName = prompt("Ingrese su nombre de item deseado.");
+    while (respuestaName == "") {
+        respuestaName = prompt("Valor vacio. Por favor, ingrese uno nuevo.")
+    }
+    let respuestaImgSrc = prompt("Ingrese el nombre de archivo de la imagen de su item.")
+    let arrayItems = await getItems()
+    for (i=0; i < await arrayItems.length; i++) {
+        while (respuestaImgSrc == await arrayItems[i].imgsrc || respuestaImgSrc == "") {
+            respuestaImgSrc = prompt("Valor vacio o en uso. Completelo.")
+        }
+        console.log("arrayItems.imgsrc: ", arrayItems[i].imgsrc)
+    }
+    let respuestaPrice = prompt("Ingrese el precio de su Item.")
+    while (respuestaPrice == "") {
+        respuestaPrice = prompt("Valor vacio. Completelo.")
+    }
+    let newItem = {
+        name:respuestaName,
+        imgsrc:respuestaImgSrc,
+        price:respuestaPrice,
+        id:arrayItems.length+1
+    };
+    postItem(newItem)
+    alert("Registro exitoso.")
+    console.log(newItem)
+    return newItem.id
+}
+
 // ------------
 
 async function cheatItems() {
@@ -171,51 +201,40 @@ async function cheatItems() {
     alert("Todos los items añadidos a " + objetoUsuario.username + ".")
 }
 
-function creaItem(){
-    let respuestaName = prompt("Ingrese su nombre de item deseado...");
-    while (respuestaName == "") {
-        respuestaName = prompt("Valor vacio. Por favor, ingrese uno nuevo...")
-    }
-    let respuestaImgSrc = prompt("Ingrese el nombre de archivo de la imagen de su item...")
-    while (respuestaImgSrc == ""){
-        respuestaImgSrc = prompt("Valor vacio. Completelo...")
-    }
-    let respuestaPrice = prompt("Ingrese el precio de su Item...")
-    while (respuestaPrice == "") {
-        respuestaPrice = prompt("Valor vacio. Completelo...")
-    }
-    let newItem = new Item()
-    postItem(newItem)
-    alert("Registro exitoso.")
-    return newItem.id
-}
 
 async function adminUserNon() { /*no esta funcionando*/
     let idAdmin = prompt("¿Que ID de usuario desea alterar?")
     let objetoUsuario = new Usuario(idAdmin)
+    console.log("Objeto usuario:" + objetoUsuario)
     let userFetchAux = await getUsuarioporID(idAdmin)
     let userFetch = userFetchAux[0]
+    console.log("Userfetch: " + userFetch)
     while (idAdmin == "" || userFetch.length == 0) {
         idAdmin = prompt("Complete el campo con un ID valido.")
     }
-    putAdmin(false,idAdmin)
+    putAdmin(false,idAdmin) /* no puede escribir 0 por algun motivo. puede escribir otras cosas*/
     objetoUsuario.updateuser()
     alert("Administrador descartado.")
 }
 
-async function addItemUser() {
+async function addItemUser() { /* falta probar :P */
     let idAdmin = prompt("¿Que ID de usuario desea añadir el item?")
     let objetoUsuarioAux = await getUsuarioporID(idAdmin)
     let objetoUsuario = objetoUsuarioAux[0]
     while (idAdmin == "" || objetoUsuario.length == 0) {
         idAdmin = prompt("Complete con un ID valido...")
     }
-    let idAdminItem = prompt("Escriba el ID del item que le dara a " + objetoUsuario.username + ".")
+    let idAdminItem = prompt("Escriba el ID del item que le dara al usuario.")
     let objetoItemAux = await getItemporID(idAdminItem)
     let objetoItem = objetoItemAux[0]
-    while (idAdminItem == "" || objetoItem == undefined) {
+    while (idAdminItem == "" || objetoItem.length == 0) {
         idAdminItem = prompt("Complete con un dato valido.")
     }
-    objetoUsuario.items.push(giveItem)
-    alert("Item añadido a " + objetoUsuario.username + ".")
+    newItemUser = {
+        itemid: idAdminItem,
+        userid: idAdmin,
+        active: 0
+    }
+    postItemporUsuario(newItemUser)
+    alert("Item añadido al usuario.")
 }
