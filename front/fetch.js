@@ -134,7 +134,7 @@ async function getItemsporUsuario() {
 
 async function getEstadistica(userID) {
     try {
-       
+       userID=parseInt(userID)  
       const res = await fetch(`http://localhost:4000/Estadistica?userid=${userID}`)
       const response = await res.json() 
       
@@ -228,7 +228,7 @@ async function postEstadistica(userID) {
           headers: { //Esto va siempre, solo aclaro que va en tipo JSON
               "Content-Type": "application/json",
             },
-          body: JSON.stringify({userid:userID}) //JSON.stringify convierte de objeto a JSON
+          body: JSON.stringify({userid:parseInt(userID)}) //JSON.stringify convierte de objeto a JSON
       })
   
       console.log(response) //Imprimo la respuesta en formato JSON

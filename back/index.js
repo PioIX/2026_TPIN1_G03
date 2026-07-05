@@ -132,7 +132,7 @@ app.get('/Estadistica', async function(req, res){
 		console.log(req.query)
 		userid=req.query.userid
 
-		if (id){
+		if (userid){
 			respuesta = await MySQL.realizarQuery(`SELECT * FROM Estadistica WHERE userid = ${userid};`)
 
 		}else{
@@ -221,7 +221,7 @@ app.post('/ItemsporUsuario', async function(req, res){
 app.post('/Estadistica', async function(req, res){
 	try {
 		console.log(req.body);
-		existe = await MySQL.realizarQuery(`SELECT * FROM Estadistica WHERE userid="${req.body.userid}";`)
+		existe = await MySQL.realizarQuery(`SELECT * FROM Estadistica WHERE userid=${req.body.userid};`)
 		if (existe.length===0){
 			await MySQL.realizarQuery(`INSERT INTO Estadistica(userid,wins,losses,played,streak,points_lost,cant_items)
 			VALUES (${req.body.userid}, 0,0, 0, 0, 0, 0);`)
@@ -368,30 +368,30 @@ try {
 		let streak=req.body.streak
 		let points_lost=req.body.points_lost
 		let cant_items=req.body.cant_items
-		console.log(username,id)
+		console.log(userid)
 		if(wins){
 			await MySQL.realizarQuery(`UPDATE Estadistica SET 
-			wins = ${req.body.wins} WHERE id = ${req.body.userid};`)
+			wins = ${req.body.wins} WHERE userid = ${req.body.userid};`)
 		}
 		if(losses){
 			await MySQL.realizarQuery(`UPDATE Estadistica SET 
-			losses = ${req.body.losses} WHERE id = ${req.body.userid};`)
+			losses = ${req.body.losses} WHERE userid = ${req.body.userid};`)
 		}
 		if(played){
 			await MySQL.realizarQuery(`UPDATE Estadistica SET 
-			played = ${req.body.played} WHERE id = ${req.body.userid};`)
+			played = ${req.body.played} WHERE userid = ${req.body.userid};`)
 		}
 		if(streak){
 			await MySQL.realizarQuery(`UPDATE Estadistica SET 
-			streak = ${req.body.streak} WHERE id = ${req.body.userid};`)
+			streak = ${req.body.streak} WHERE userid = ${req.body.userid};`)
 		}
 		if(points_lost){
 			await MySQL.realizarQuery(`UPDATE Estadistica SET 
-			points_lost = ${req.body.points_lost} WHERE id = ${req.body.userid};`)
+			points_lost = ${req.body.points_lost} WHERE userid = ${req.body.userid};`)
 		}
 		if(cant_items){
 			await MySQL.realizarQuery(`UPDATE Estadistica SET 
-			cant_items = ${req.body.cant_items} WHERE id = ${req.body.userid};`)
+			cant_items = ${req.body.cant_items} WHERE userid = ${req.body.userid};`)
 		}
 		res.send({message: "Estadística actualizada"})
 } catch (error) {

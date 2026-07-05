@@ -31,6 +31,7 @@ async function handleSignup(){
     alert("Registro exitoso!")
     let newUsuario = new Usuario(leerUsername.id)
     postUsuario(newUsuario)
+    postEstadistica(newUsuario.id)
     return newUsuario.id
 }
 
@@ -48,9 +49,25 @@ async function handleLogin(){
         UserLogged = new Usuario(leerUsername[valorPosicion].id)
         UserLogged.updateuser()
         sessionStorage.setItem("User",JSON.stringify(UserLogged))
+        window.location.reload()
     } else {
         alert("Usuario no encontrado. Vuelva a intentarlo.")
     }
 }
 
+
+
+async function logout() {
+    let tempuser=JSON.parse(sessionStorage.getItem("User"))
+    if (tempuser==null){
+        alert("No hay usuario iniciado")
+    }else if(confirm("¿Está seguro de que quiere cerrar sesión?")){
+        sessionStorage.setItem("User",null)
+        UserLogged = {}
+        alert("Sesión cerrada")
+    }
+
+}
 /*nota: borrar usuario vacio que tiene nombre ""*/
+
+/* FALTA AÑADIR MODAL DE PERFIL*/
