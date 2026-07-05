@@ -39,7 +39,7 @@ const cartasrefD = [
   "img/cartas/100.png",
   "img/cartas/J0.png",
   "img/cartas/Q0.png",
-  "img/cartas/K0.png",
+  "img/cartas/KV.png",
 
 
 ];
@@ -77,7 +77,8 @@ async function handleir(){
   
 }
 async function iraljuego() {
-  
+  document.getElementById("buttonhit").disabled=false
+  document.getElementById("buttonstand").disabled=false
   UserLogged.updateuser()
   console.log(UserLogged)
   console.log("points: ")
@@ -192,6 +193,8 @@ function replay(){
 
 
 async function win(){
+  document.getElementById("buttonhit").disabled=true
+  document.getElementById("buttonstand").disabled=true
   winpoints=sessionStorage.getItem("winpoints")
   estad= await getEstadistica(UserLogged.id)
   newestad={
@@ -218,6 +221,8 @@ async function win(){
 
 
 async function lose(){
+  document.getElementById("buttonhit").disabled=true
+  document.getElementById("buttonstand").disabled=true
   winpoints=sessionStorage.getItem("winpoints")
   UserLogged.points-=parseInt(winpoints)
   console.log(UserLogged)
