@@ -1,6 +1,7 @@
 
 
 let juego = {};
+
 let winpoints=1
 let tempuser=JSON.parse(sessionStorage.getItem("User"))
 if (tempuser!=null){
@@ -39,6 +40,8 @@ const cartasrefD = [
   "img/cartas/J0.png",
   "img/cartas/Q0.png",
   "img/cartas/K0.png",
+
+
 ];
 const buttonhit = document.getElementById("buttonhit");
 const buttonstand = document.getElementById("buttonstand");
