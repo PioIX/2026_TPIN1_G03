@@ -186,6 +186,12 @@ dialog{
 
 /*JUEGO*/
 .cartas img{
+    height: 300px;
+}
+
+.divTabla {
+    display: flex;
+    margin-bottom: 2rem;
     height: 250px;
 }
 #juego{
