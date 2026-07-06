@@ -43,7 +43,7 @@ async function genItems(){
     }else {
         document.getElementById("titems").innerHTML+= `
         <td>${items[i].name}</td>
-        <td></td>
+        <td>Precio</td>
         <td>
         <p>Equipado:</p> 
         <button id="buyitem${items[i].id}" onclick="additem(${items[i].id})">
