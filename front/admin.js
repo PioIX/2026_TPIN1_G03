@@ -8,7 +8,6 @@ async function verUsers() {
         <th>Points</th>
         <th>Password</th>
         <th>Admin</th>
-        <th>Items</th>
     </tr>`
     console.log(tabla)
     for (let i=0; i<tabla.length; i++) {
@@ -20,7 +19,6 @@ async function verUsers() {
             <td>${element.points}</td>
             <td>${element.password}</td>
             <td>${element.is_admin}</td>
-            <td>${element.items}</td>
         </tr>
         `;        
     }
@@ -54,13 +52,37 @@ async function verItems() {
     document.getElementById("ListaDeItems").innerHTML += elementosLista
 }
 
+async function verInventario() {
+    const tabla = await getItemsporUsuario()
+    let elementosLista = ""
+    document.getElementById("ListaDeInventarios").innerHTML=`
+    <tr>
+        <th>ID User</th>
+        <th>ID Item</th>
+        <th>Active</th>
+    </tr>`
+    console.log(tabla)
+    for (let i=0; i<tabla.length; i++) {
+        const element = tabla[i];
+        elementosLista += `
+        <tr>
+            <td>${element.itemid}</td>
+            <td>${element.userid}</td>
+            <td>${element.active}</td>
+        </tr>
+        `;        
+    }
+    console.log(elementosLista)
+    document.getElementById("ListaDeInventarios").innerHTML += elementosLista
+}
+
 async function borrarUser() {
     let idAdmin = prompt("¿Que ID de usuario desea eliminar?")
     let objetoUsuarioAux = await getUsuarioporID(idAdmin)
     let objetoUsuario = objetoUsuarioAux[0]
     console.log(objetoUsuario)
-    while (itemBorrar == "" || objetoUsuario.length == 0) {
-        itemBorrar = prompt("Complete con un dato valido.")
+    while (idAdmin == "" || objetoUsuario.length == 0) {
+        idAdmin = prompt("Complete con un dato valido.")
     }
     deleteUsuario(idAdmin)
     alert("Usuario Borrado.")
@@ -185,23 +207,6 @@ async function creaItem(){
     return newItem.id
 }
 
-// ------------
-
-async function cheatItems() {
-    let idAdmin = prompt("¿Que ID de usuario desea alterar?")
-    let objetoUsuarioAux = await getUsuarioporID(idAdmin)
-    let objetoUsuario = objetoUsuarioAux[0]
-    console.log(objetoUsuario)
-    while (idAdmin == "" || objetoUsuario.length == 0) {
-        idAdmin = prompt("Complete con un ID valido...")
-    }
-    let todosLosItems = await getItems() 
-    objetoUsuario.items = todosLosItems
-    console.log(objetoUsuario.items)
-    alert("Todos los items añadidos a " + objetoUsuario.username + ".")
-}
-
-
 async function adminUserNon() { /*no esta funcionando*/
     let idAdmin = prompt("¿Que ID de usuario desea alterar?")
     let objetoUsuario = new Usuario(idAdmin)
@@ -237,4 +242,26 @@ async function addItemUser() { /* falta probar :P */
     }
     postItemporUsuario(newItemUser)
     alert("Item añadido al usuario.")
+}
+
+async function cheatItems() {
+    let idAdmin = prompt("¿Que ID de usuario desea alterar?")
+    let objetoUsuarioAux = await getUsuarioporID(idAdmin)
+    let objetoUsuario = objetoUsuarioAux[0]
+    console.log(objetoUsuario)
+    while (idAdmin == "" || objetoUsuario.length == 0) {
+        idAdmin = prompt("Complete con un ID valido...")
+    }
+    let allItems = await getItems()
+    for (i=0; i<allItems.length; i++){
+        let idAllItems = allItems[i].id
+        console.log(idAllItems)
+        currentItem = {
+            itemid: idAllItems,
+            userid: idAdmin,
+            active: 0
+        }
+        postItemporUsuario(currentItem)
+    }
+    alert("Todos los items añadidos al usuario.")
 }
