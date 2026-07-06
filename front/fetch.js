@@ -8,11 +8,28 @@ async function getUsuarioporID(ID) {
       
       console.log(response) 
       console.log(response.message.length)
+      return response.message[0]
+    } catch (error) {
+      console.log('Error:', error.message)
+    }
+}
+
+
+async function getUsuarioporUsername(user) {
+    try {
+        
+      const res = await fetch(`http://localhost:4000/Usuarios?username=${user}`)
+      const response = await res.json() 
+      
+      console.log(response) 
+      console.log(response.message.length)
       return response.message
     } catch (error) {
       console.log('Error:', error.message)
     }
 }
+
+
 
 async function getRanking() {
     try {
@@ -60,7 +77,7 @@ async function getItemporID(ID) {
       const response = await res.json() 
       console.log(response) 
       console.log(response.message.length)
-      return response.message
+      return response.message[0]
     } catch (error) {
       console.log('Error:', error.message)
     }
@@ -81,7 +98,7 @@ async function getUnItemporUnUsuario(itemID,userID) {
       const response = await res.json() 
       console.log(response) 
       console.log(response.message.length)
-      return response.message
+      return response.message[0]
     } catch (error) {
       console.log('Error:', error.message)
     }
@@ -97,7 +114,7 @@ async function getInventario(userID) {
       const response = await res.json() 
       console.log(response) 
       console.log(response.message.length)
-      return response.message
+      return response.message[0]
     } catch (error) {
       console.log('Error:', error.message)
     }
@@ -110,6 +127,20 @@ async function getItemsporUsuario() {
       console.log(response) 
       console.log(response.message.length)
       return response.message
+    } catch (error) {
+      console.log('Error:', error.message)
+    }
+}
+
+async function getEstadistica(userID) {
+    try {
+       userID=parseInt(userID)  
+      const res = await fetch(`http://localhost:4000/Estadistica?userid=${userID}`)
+      const response = await res.json() 
+      
+      console.log(response) 
+      console.log(response.message.length)
+      return response.message[0]
     } catch (error) {
       console.log('Error:', error.message)
     }
@@ -172,6 +203,32 @@ async function postItemporUsuario(datos) {
               "Content-Type": "application/json",
             },
           body: JSON.stringify(datos) //JSON.stringify convierte de objeto a JSON
+      })
+  
+      console.log(response) //Imprimo la respuesta en formato JSON
+      
+      let result = await response.json()//Desarma el json y lo arma como un objeto
+      console.log(result)
+      return result.message
+
+    } catch (error) {
+      console.log('Error:', error.message)
+      return error.message
+    }
+}
+
+
+
+
+
+async function postEstadistica(userID) {
+    try {
+      const response = await fetch('http://localhost:4000/Estadistica',{
+          method:"POST", //GET, POST, PUT o DELETE
+          headers: { //Esto va siempre, solo aclaro que va en tipo JSON
+              "Content-Type": "application/json",
+            },
+          body: JSON.stringify({userid:parseInt(userID)}) //JSON.stringify convierte de objeto a JSON
       })
   
       console.log(response) //Imprimo la respuesta en formato JSON
@@ -252,6 +309,29 @@ async function deleteItemporUsuario(dato){
       return error.message
     }
 }
+
+async function deleteEstadistica(dato){
+  try {
+      const response = await fetch('http://localhost:4000/Estadistica',{
+          method:"DELETE", //GET, POST, PUT o DELETE
+          headers: { //Esto va siempre, solo aclaro que va en tipo JSON
+              "Content-Type": "application/json", 
+            },
+          body: JSON.stringify({userid: dato}) //JSON.stringify convierte de objeto a JSON
+      })
+  
+      console.log(response) //Imprimo la respuesta en formato JSON
+      
+      let result = await response.json()//Desarma el json y lo arma como un objeto
+      console.log(result)
+      return result.message
+
+    } catch (error) {
+      console.log('Error:', error.message)
+      return error.message
+    }
+}
+
 
 
 async function putUsername(newuser,ID){
@@ -431,6 +511,26 @@ async function putPrice(newprice,ID){
               "Content-Type": "application/json", 
             },
           body: JSON.stringify({userid:userID,itemid:itemID}) //JSON.stringify convierte de objeto a JSON
+      })
+      console.log(response) //Imprimo la respuesta en formato JSON
+      
+      let result = await response.json()//Desarma el json y lo arma como un objeto
+      console.log(result)
+      return result.message
+    
+    } catch (error) {
+      console.log('Error:', error.message)
+      return error.message
+    }}
+
+async function putEstadistica(estad){
+  try {
+      const response = await fetch('http://localhost:4000/Estadistica',{
+          method:"PUT", //GET, POST, PUT o DELETE
+          headers: { //Esto va siempre, solo aclaro que va en tipo JSON
+              "Content-Type": "application/json", 
+            },
+          body: JSON.stringify(estad) //JSON.stringify convierte de objeto a JSON
       })
       console.log(response) //Imprimo la respuesta en formato JSON
       

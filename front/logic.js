@@ -1,33 +1,57 @@
-let UserLogged = {} // despues = objeto de usuario loggeado
+let UserLogged = {}
+let coincidencia
+let valorPosicion
 
-
-function handleSignup(){
-    const respuestaUsername = prompt("Ingrese su nombre de usuario deseado...");
-    if (respuestaUsername == "" || getUsuarioporUsername(respuestaUsername).length !== 0) {
-        const respuestaUsername = prompt("Valor en uso o vacio. Por favor, ingrese uno nuevo...")
-    } else {
-        const respuestaPassword = prompt("Ingrese su contraseña deseada...")
-        if (respuestaPassword == ""){
-            const respuestaPassword = prompt("Valor vacio. Completelo...")
+function coincidir(leerUsername,respuestaUsername) {
+    for (i=0; i<leerUsername.length; i++){
+        if (leerUsername[i].username == respuestaUsername){
+            coincidencia = true
+            valorPosicion = i
+            console.log("Vieja posicion de I del user: ", valorPosicion)
+            break
+        } else {
+            coincidencia = false
         }
     }
-    let newUsuario = new Usuario(idUser)
-    postUsuario(newUsuario)
-    return newUsuario.idUser
 }
 
-function handleLogin(){
-    const respuestaUsername = prompt("Ingrese su nombre de usuario...")
-    const respuestaPassword = prompt("Ingrese la contraseña del usuario...")
-    let leerUsername = getUsuarioporUsername(respuestaUsername)
+async function handleSignup(){
+    let respuestaUsername = prompt("Ingrese su nombre de usuario deseado...");
+    let leerUsername = await getUsuarioporUsername(respuestaUsername)
+    coincidir(leerUsername,respuestaUsername)
+    console.log("coincidencia: ",coincidencia)
+    while (respuestaUsername == "" || coincidencia == true) {
+        respuestaUsername = prompt("Valor en uso o vacio. Por favor, ingrese uno nuevo...")
+        coincidir(leerUsername,respuestaUsername)
+    }
+    let respuestaPassword = prompt("Ingrese su contraseña deseada...")
+    while (respuestaPassword === ""){
+        respuestaPassword = prompt("Valor vacio. Completelo...")
+    }
+    alert("Registro exitoso!")
+    let newUsuario = new Usuario(leerUsername.id)
+    postUsuario(newUsuario)
+    postEstadistica(newUsuario.id)
+    return newUsuario.id
+}
 
-    if (leerUsername.length !== 0) {
-        if (respuestaPassword == leerUsername.password) {
-            UserLogged = new Usuario(leerUsername.id)
-            UserLogged.updateuser()
-        }else {
-            alert("La contraseña no es correcta.")
+async function handleLogin(){
+    let respuestaUsername = prompt("Ingrese su nombre de usuario...")
+    let leerUsername = await getUsuarioporUsername(respuestaUsername)
+    coincidir(leerUsername,respuestaUsername)
+    if (coincidencia == true) {
+        let respuestaPassword = prompt("Ingrese la contraseña del usuario...")
+        console.log("Posicion en I del user: ",valorPosicion)
+        while (leerUsername[valorPosicion].password !== respuestaPassword){
+            respuestaPassword = prompt("La contraseña no es correcta. Vuelva a intentar...")
         }
+        alert("Login exitoso!")
+        UserLogged = new Usuario(leerUsername[valorPosicion].id)
+        UserLogged.updateuser()
+        sessionStorage.setItem("User",JSON.stringify(UserLogged))
+        window.location.reload()
+    } else {
+        alert("Usuario no encontrado. Vuelva a intentarlo.")
     }
 }
 
@@ -40,3 +64,19 @@ function tryAdmin() {
         alert("No hay usuario logueado.")
     }
 }
+
+
+async function logout() {
+    let tempuser=JSON.parse(sessionStorage.getItem("User"))
+    if (tempuser==null){
+        alert("No hay usuario iniciado")
+    }else if(confirm("¿Está seguro de que quiere cerrar sesión?")){
+        sessionStorage.setItem("User",null)
+        UserLogged = {}
+        alert("Sesión cerrada")
+    }
+
+}
+/*nota: borrar usuario vacio que tiene nombre ""*/
+
+/* FALTA AÑADIR MODAL DE PERFIL*/
