@@ -43,11 +43,18 @@ app.get('/Usuarios', async function(req, res){
 	try {
 		console.log(req.query)
 		id=req.query.id
+		username=req.query.username
 		if (id){
 			respuesta = await MySQL.realizarQuery(`SELECT * FROM Usuarios WHERE id = ${id};`)
 
 		}else{
-			respuesta = await MySQL.realizarQuery(`SELECT * FROM Usuarios;`)
+			if(username){
+				respuesta = await MySQL.realizarQuery(`SELECT * FROM Usuarios WHERE username = "${username}";`)
+
+			}else{
+
+				respuesta = await MySQL.realizarQuery(`SELECT * FROM Usuarios;`)
+			}
 		}
 	
 			

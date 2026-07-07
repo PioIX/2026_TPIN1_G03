@@ -180,6 +180,18 @@ dialog{
     span{
         color: black;
     }
+    .pdiv{
+        display: flex;
+        flex-direction: row;
+        font-size: 25px;
+        width: 100%;
+        gap: 4rem;
+        justify-content: space-between;
+    }
+    #stats{
+        width: auto;
+        justify-self: center;   
+    }
 }
 
 
@@ -308,7 +320,21 @@ background-color: #8f534c;
 background-color: #585757;
 }
 
+<<<<<<< Updated upstream
 
+=======
+@media (overflow-block: scroll) {
+    #cardsec{
+        img{
+            height: 30vh;
+        }
+
+    }
+    body{
+        overflow: hidden;
+    }
+}
+>>>>>>> Stashed changes
 
 
 /*RANKING */

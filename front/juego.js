@@ -228,7 +228,7 @@ async function lose(){
     losses:estad.losses+1,
     played:estad.played+1,
     streak:1,
-    points_lost:estad.points_lost+winpoints,
+    points_lost:estad.points_lost+parseInt(winpoints),
     cant_items:estad.cant_items
   }
   await putEstadistica(newestad)
@@ -241,17 +241,27 @@ async function lose(){
 }
 
 async function showstats() {
-  modal=document.getElementById("dialoguser")
-  stats= await getEstadistica(UserLogged.id)
-  document.getElementById("h2user").innerText=UserLogged.username
+  if(Object.keys(UserLogged).length === 0 || Object.keys(UserLogged).length === undefined || UserLogged === null){
+    document.getElementById("homeaviso").innerText="Inicie sesión para ver sus estadísticas"
+  }else{
+    UserLogged.updateuser()
+    modal=document.getElementById("dialoguser")
+    stats= await getEstadistica(UserLogged.id)
+    document.getElementById("h2user").innerText=UserLogged.username
     document.getElementById("statpoints").innerText=UserLogged.points
+    document.getElementById("statwins").innerText=stats.wins
+    document.getElementById("statlosses").innerText=stats.losses
+    if(stats.streak==0){
+      document.getElementById("statstreak").innerText=stats.streak
+    }else{
+      document.getElementById("statstreak").innerText=stats.streak-1
 
-  document.getElementById("statwins").innerText=stats.wins
-  document.getElementById("statlosses").innerText=stats.losses
-  document.getElementById("statstreak").innerText=stats.streak-1
-document.getElementById("statplayed").innerText=stats.played
-document.getElementById("statlostpoints").innerText=stats.points_lost
-document.getElementById("statitems").innerText=stats.cant_items
-  modal.showModal();
+    }
+    document.getElementById("statplayed").innerText=stats.played
+    document.getElementById("statlostpoints").innerText=stats.points_lost
+    document.getElementById("statitems").innerText=stats.cant_items
+    modal.showModal();
+    
+  }
 
 }

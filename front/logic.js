@@ -18,35 +18,58 @@ function coincidir(leerUsername,respuestaUsername) {
 async function handleSignup(){
     let respuestaUsername = prompt("Ingrese su nombre de usuario deseado...");
     let leerUsername = await getUsuarioporUsername(respuestaUsername)
-    coincidir(leerUsername,respuestaUsername)
+    console.log(leerUsername)
+    if (!leerUsername || Object.keys(leerUsername).length===0){
+        coincidencia=false
+    }else{
+        coincidencia=true
+    }
     console.log("coincidencia: ",coincidencia)
     while (respuestaUsername == "" || coincidencia == true) {
         respuestaUsername = prompt("Valor en uso o vacio. Por favor, ingrese uno nuevo...")
-        coincidir(leerUsername,respuestaUsername)
+        leerUsername = await getUsuarioporUsername(respuestaUsername)
+        if (!leerUsername || Object.keys(leerUsername).length===0){
+        coincidencia=false
+        }else{
+        coincidencia=true
+        }
     }
     let respuestaPassword = prompt("Ingrese su contraseña deseada...")
     while (respuestaPassword === ""){
         respuestaPassword = prompt("Valor vacio. Completelo...")
     }
-    alert("Registro exitoso!")
-    let newUsuario = new Usuario(leerUsername.id)
-    postUsuario(newUsuario)
-    postEstadistica(newUsuario.id)
+    
+    console.log(leerUsername)
+    let newUsuario={
+        username: respuestaUsername,
+        password: respuestaPassword,
+        points: 0,
+        is_admin: 0
+    }
+    console.log(newUsuario)
+    
+    alert(await postUsuario(newUsuario))
+    createduser = await getUsuarioporUsername(respuestaUsername)
+    console.log(createduser.id)
+    await postEstadistica(createduser.id)
     return newUsuario.id
 }
 
 async function handleLogin(){
     let respuestaUsername = prompt("Ingrese su nombre de usuario...")
     let leerUsername = await getUsuarioporUsername(respuestaUsername)
-    coincidir(leerUsername,respuestaUsername)
+        if (!leerUsername || Object.keys(leerUsername).length===0){
+        coincidencia=false
+        }else{
+        coincidencia=true
+        }
     if (coincidencia == true) {
         let respuestaPassword = prompt("Ingrese la contraseña del usuario...")
-        console.log("Posicion en I del user: ",valorPosicion)
-        while (leerUsername[valorPosicion].password !== respuestaPassword){
+        while (leerUsername.password !== respuestaPassword){
             respuestaPassword = prompt("La contraseña no es correcta. Vuelva a intentar...")
         }
         alert("Login exitoso!")
-        UserLogged = new Usuario(leerUsername[valorPosicion].id)
+        UserLogged = new Usuario(leerUsername.id)
         UserLogged.updateuser()
         sessionStorage.setItem("User",JSON.stringify(UserLogged))
         window.location.reload()
@@ -78,5 +101,8 @@ async function logout() {
 
 }
 /*nota: borrar usuario vacio que tiene nombre ""*/
+<<<<<<< Updated upstream
 
 /* FALTA AÑADIR MODAL DE PERFIL*/
+=======
+>>>>>>> Stashed changes
