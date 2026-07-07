@@ -23,7 +23,7 @@ async function getUsuarioporUsername(user) {
       
       console.log(response) 
       console.log(response.message.length)
-      return response.message
+      return response.message[0]
     } catch (error) {
       console.log('Error:', error.message)
     }

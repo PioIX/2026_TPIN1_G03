@@ -43,11 +43,18 @@ app.get('/Usuarios', async function(req, res){
 	try {
 		console.log(req.query)
 		id=req.query.id
+		username=req.query.username
 		if (id){
 			respuesta = await MySQL.realizarQuery(`SELECT * FROM Usuarios WHERE id = ${id};`)
 
 		}else{
-			respuesta = await MySQL.realizarQuery(`SELECT * FROM Usuarios;`)
+			if(username){
+				respuesta = await MySQL.realizarQuery(`SELECT * FROM Usuarios WHERE username = "${username}";`)
+
+			}else{
+
+				respuesta = await MySQL.realizarQuery(`SELECT * FROM Usuarios;`)
+			}
 		}
 	
 			
@@ -241,7 +248,7 @@ app.post('/Estadistica', async function(req, res){
 
 app.delete('/Usuarios', async function(req, res){
 	try {
-		await MySQL.realizarQuery(`DELETE FROM Usuarios WHERE id = ${req.body.id};`)
+		await MySQL.realizarQuery(`SET FOREIGN_KEY_CHECKS = 0;DELETE FROM Usuarios WHERE id = ${req.body.id};SET FOREIGN_KEY_CHECKS = 1;`)
 		res.send({message: "Usuario eliminado"})
 	} catch (error) {
 		console.log('Error:', error.message)
@@ -253,7 +260,7 @@ app.delete('/Usuarios', async function(req, res){
 
 app.delete('/Items', async function(req, res){
 	try {
-		await MySQL.realizarQuery(`DELETE FROM Items WHERE id = ${req.body.id};`)
+		await MySQL.realizarQuery(`SET FOREIGN_KEY_CHECKS = 0;DELETE FROM Items WHERE id = ${req.body.id};SET FOREIGN_KEY_CHECKS = 1;`)
 		res.send({message: "Item eliminado"})
 	} catch (error) {
 		console.log('Error:', error.message)
@@ -266,7 +273,7 @@ app.delete('/Items', async function(req, res){
 
 app.delete('/ItemsporUsuario', async function(req, res){
 	try {
-		await MySQL.realizarQuery(`DELETE FROM ItemsporUsuario WHERE userid = ${req.body.userid} AND itemid= ${req.body.itemid};`)
+		await MySQL.realizarQuery(`SET FOREIGN_KEY_CHECKS = 0;DELETE FROM ItemsporUsuario WHERE userid = ${req.body.userid} AND itemid= ${req.body.itemid};SET FOREIGN_KEY_CHECKS = 1;`)
 		res.send({message: "Item eliminado del usuario"})
 	} catch (error) {
 		console.log('Error:', error.message)
@@ -307,18 +314,20 @@ try {
 			await MySQL.realizarQuery(`UPDATE Usuarios SET 
 			username = "${req.body.username}" WHERE id = ${req.body.id};`)
 		}
-		if(password){
+		else if(password){
 			await MySQL.realizarQuery(`UPDATE Usuarios SET 
 			password = "${req.body.password}" WHERE id = ${req.body.id};`)
-		}
-		if(points || points==0){
+		}	else if(points || points==0){
 			await MySQL.realizarQuery(`UPDATE Usuarios SET 
 			points = ${req.body.points} WHERE id = ${req.body.id};`)
-		}
-		if(is_admin){
+		}else if(is_admin){
 			await MySQL.realizarQuery(`UPDATE Usuarios SET 
 			is_admin = ${req.body.is_admin} WHERE id = ${req.body.id};`)
 		}
+		else if(id){
+			await MySQL.realizarQuery(`UPDATE Usuarios SET 
+			is_admin = ${req.body.is_admin} WHERE id = ${req.body.id};`)
+		} 	
 		res.send({message: "Usuario actualizado"})
 } catch (error) {
 	console.log('Error:', error.message)

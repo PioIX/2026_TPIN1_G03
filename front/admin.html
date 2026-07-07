@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administracion</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>ADMINISTRACION</h1>
+
+
+    <h2>Usuarios </h2>
+
+    <!-- muestra usuarios en pantalla -->
+    <button onclick="verUsers()">
+        Ver
+    </button>
+
+    <button onclick="verInventario()">
+        Ver inventario
+    </button>
+
+    <!-- elimina usuarios -->
+    <button onclick="borrarUser()">
+        Eliminar
+    </button>
+
+    <!-- designa admins -->
+    <button onclick="adminUser()">
+        Designar como administrador
+    </button>
+
+    <!-- descarta admins -->
+    <button onclick="adminUserNon()"> <!-- hecho -->
+        Descartar como administrador
+    </button>
+
+    <!-- ajusta puntos -->
+    <button onclick="modPuntosUser()">
+        Modificar puntaje
+    </button>
+
+    <!-- añade items a un usuario -->
+    <button onclick="addItemUser()"> <!-- pendiente / revisar -->
+        Añadir items
+    </button>
+
+
+    <h2>Items</h2>
+
+    <!-- muestra items -->
+    <button onclick="verItems()"> 
+        Ver
+    </button>
+
+    <!-- crea un item -->
+    <button onclick="creaItem()"> <!-- pendiente / revisar -->
+        Crear
+    </button>
+
+    <!-- borra un item -->
+    <button onclick="borrarItem()">
+        Borrar
+    </button>
+
+    <!-- modifica imagen de item -->
+    <button onclick="modItemImage()">
+        Modificar imagen
+    </button>
+
+    <!-- modifica precio de item -->
+    <button onclick="modItemPrice()">
+        Modificar precio
+    </button>
+
+
+    <h2>Cheats</h2>
+
+    <!-- +500 puntos para un usuario -->
+    <button onclick="cheatPuntos()">
+        +500 puntos
+    </button>
+
+    <!-- todos los items para un usuario -->
+    <button onclick="cheatItems()"> <!-- hecho -->
+        Dar todos los items
+    </button>
+
+
+    <h2>Tablas</h2>
+
+    <div class="divTabla">
+        <table id="ListaDeUsers">
+        </table>
+    </div>
+
+    <div class="divTabla">
+        <table id="ListaDeItems">
+        </table>
+    </div>
+
+    <div class="divTabla">
+        <table id="ListaDeInventarios">
+        </table>
+    </div>
+
+    <script src="usuarios.js"></script>
+    <script src="items.js"></script>
+    <script  src="fetch.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

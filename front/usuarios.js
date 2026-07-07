@@ -9,7 +9,7 @@ class Usuario{
     }
     async updateuser(){
         let newuser= await getUsuarioporID(this.id);
-        let inv= await getInventario(this.id)
+        let inv= await getInventario(this.id) || []
         console.log(this.id)
         console.log(inv)
         console.log(newuser.username)
