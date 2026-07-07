@@ -101,8 +101,4 @@ async function logout() {
 
 }
 /*nota: borrar usuario vacio que tiene nombre ""*/
-<<<<<<< Updated upstream
 
-/* FALTA AÑADIR MODAL DE PERFIL*/
-=======
->>>>>>> Stashed changes

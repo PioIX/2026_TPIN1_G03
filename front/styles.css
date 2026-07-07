@@ -320,9 +320,7 @@ background-color: #8f534c;
 background-color: #585757;
 }
 
-<<<<<<< Updated upstream
 
-=======
 @media (overflow-block: scroll) {
     #cardsec{
         img{
@@ -334,7 +332,6 @@ background-color: #585757;
         overflow: hidden;
     }
 }
->>>>>>> Stashed changes
 
 
 /*RANKING */
