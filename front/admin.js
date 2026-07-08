@@ -102,10 +102,11 @@ async function borrarItem() {
 async function modPuntosUser() {
     let idAdmin = prompt("¿Que ID de usuario desea alterar?")
     let objetoUsuario = new Usuario(idAdmin)
-    let userFetchAux = await getUsuarioporID(idAdmin)
-    let userFetch = userFetchAux[0]
-    while (idAdmin == "" || userFetch.length == 0) {
+    let userFetch = await getUsuarioporID(idAdmin)
+    while (idAdmin == "" ||  Object.keys(userFetch).length===0) {
         idAdmin = prompt("Complete el campo con un ID valido.")
+        objetoUsuario = new Usuario(idAdmin)
+        userFetch = await getUsuarioporID(idAdmin)
     }
     let newPuntos = prompt("Escriba el nuevo puntaje total del usuario.")
     while (newPuntos == "") {
@@ -119,10 +120,11 @@ async function modPuntosUser() {
 async function cheatPuntos() {
     let idAdmin = prompt("¿Que ID de usuario desea alterar?")
     let objetoUsuario = new Usuario(idAdmin)
-    let userFetchAux = await getUsuarioporID(idAdmin)
-    let userFetch = userFetchAux[0]
-    while (idAdmin == "" || userFetch.length == 0) {
+    let userFetch = await getUsuarioporID(idAdmin)
+    while (idAdmin == "" ||  Object.keys(userFetch).length===0) {
         idAdmin = prompt("Complete el campo con un ID valido.")
+        objetoUsuario = new Usuario(idAdmin)
+        userFetch = await getUsuarioporID(idAdmin)
     }
     let newPuntos = userFetch.points + 500
     putPoints(newPuntos,idAdmin)
@@ -133,10 +135,11 @@ async function cheatPuntos() {
 async function adminUser() {
     let idAdmin = prompt("¿Que ID de usuario desea alterar?")
     let objetoUsuario = new Usuario(idAdmin)
-    let userFetchAux = await getUsuarioporID(idAdmin)
-    let userFetch = userFetchAux[0]
-    while (idAdmin == "" || userFetch.length == 0) {
+    let userFetch = await getUsuarioporID(idAdmin)
+    while (idAdmin == "" ||  Object.keys(userFetch).length===0) {
         idAdmin = prompt("Complete el campo con un ID valido.")
+        objetoUsuario = new Usuario(idAdmin)
+        userFetch = await getUsuarioporID(idAdmin)
     }
     putAdmin(true,idAdmin)
     objetoUsuario.updateuser()
@@ -207,22 +210,21 @@ async function creaItem(){
     return newItem.id
 }
 
-async function adminUserNon() { /*no esta funcionando*/
+async function adminUserNon() {
     let idAdmin = prompt("¿Que ID de usuario desea alterar?")
     let objetoUsuario = new Usuario(idAdmin)
-    console.log("Objeto usuario:" + objetoUsuario)
-    let userFetchAux = await getUsuarioporID(idAdmin)
-    let userFetch = userFetchAux[0]
-    console.log("Userfetch: " + userFetch)
-    while (idAdmin == "" || userFetch.length == 0) {
+    let userFetch = await getUsuarioporID(idAdmin)
+    while (idAdmin == "" ||  Object.keys(userFetch).length===0) {
         idAdmin = prompt("Complete el campo con un ID valido.")
+        objetoUsuario = new Usuario(idAdmin)
+        userFetch = await getUsuarioporID(idAdmin)
     }
-    putAdmin(false,idAdmin) /* no puede escribir 0 por algun motivo. puede escribir otras cosas*/
+    putAdmin(false,idAdmin)
     objetoUsuario.updateuser()
     alert("Administrador descartado.")
 }
 
-async function addItemUser() { /* falta probar :P */
+async function addItemUser() {
     let idAdmin = prompt("¿Que ID de usuario desea añadir el item?")
     let objetoUsuarioAux = await getUsuarioporID(idAdmin)
     let objetoUsuario = objetoUsuarioAux[0]
