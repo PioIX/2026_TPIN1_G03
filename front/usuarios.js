@@ -8,8 +8,9 @@ class Usuario{
         this.items=[]
     }
     async updateuser(){
+        let inv = []
         let newuser= await getUsuarioporID(this.id);
-        let inv= await getInventario(this.id) || []
+        inv= await getInventario(this.id) || []
         console.log(inv)
         this.username=newuser.username
         this.password=newuser.password

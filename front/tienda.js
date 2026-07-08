@@ -51,14 +51,14 @@ async function genItems(){
         <td>Comprado</td>
         <td>
         
-        <button class="equip" id="equipitem${items[i].id}" onclick="itemequip(${items[i]})">Equipar</button>
+        <button class="equip" id="equipitem${items[i].id}" onclick="itemequip(${items[i].id})">Equipar</button>
         </td>`
     }else if(bog && invitem.active==1){
         document.getElementById("titems").innerHTML+= `
         <td>${items[i].name}</td>
         <td>Comprado</td>
         <td>
-        <button class="equipped" id="equippeditem${items[i].id}" onclick="unequip(${items[i]})">Equipado
+        <button class="equipped" id="equippeditem${items[i].id}" onclick="unequip(${items[i].id})">Equipado
         </button>
         </td>`
     }else {
@@ -67,7 +67,7 @@ async function genItems(){
         <td>$${items[i].price}</td>
         <td>
         <p></p> 
-        <button class="buyitem" id="buyitem${items[i].id}" onclick="additem(${items[i]})">
+        <button class="buyitem" id="buyitem${items[i].id}" onclick="additem(${items[i].id})">
         Comprar
         </button>
         </td>`
@@ -88,20 +88,20 @@ for (i=0;i<bgs.length;i++){
         }
         
     }
-    console.log(bgs[i])
+  
     if(bog && invitem.active==0){
         document.getElementById("tbackgrounds").innerHTML+= `
         <td>${bgs[i].name}</td>
         <td>Comprado</td>
         <td>
-        <button class="equip" id="equipbg${bgs[i].id}" onclick="itemequip(${bgs[i]})">Equipar</button>
+        <button class="equip" id="equipbg${bgs[i].id}" onclick="itemequip(${bgs[i].id})">Equipar</button>
         </td>`
     }else if(bog && invitem.active==1){
         document.getElementById("tbackgrounds").innerHTML+= `
         <td>${bgs[i].name}</td>
         <td>Comprado</td>
         <td>
-        <button class="equipped" id="equippedbg${bgs[i].id}" onclick="unequip(${bgs[i]})">Equipado
+        <button class="equipped" id="equippedbg${bgs[i].id}" onclick="unequip(${bgs[i].id})">Equipado
         </button>
         </td>`
     }else{
@@ -115,8 +115,7 @@ for (i=0;i<bgs.length;i++){
         </button>
         </td>`
         console.log(bgs[i])
-        //arreglar, no anda bien el parametro ni la carga de items (comprado vs no)
-        //revisar itemsporusuario
+
 
     }
 
@@ -124,8 +123,9 @@ for (i=0;i<bgs.length;i++){
 
 }
 
-async function itemequip(item){
+async function itemequip(itemid){
     //tiene que chequear si hay otro item equipado y desactivarlo, y activar el item que se quiere equipar
+    item= await getItemporID(itemid)
     console.log(item)
     let invent= await getInventario(UserLogged.id) || []
     
@@ -150,30 +150,51 @@ async function itemequip(item){
     }
     }
     }
-    await activateItem(item.id,UserLogged.id)
+    await activateItem(item.id,UserLogged.id)   
     console.log(`Item ${item.id} activado`)
     UserLogged.updateuser()
     window.location.reload()
 }
 
-async function unequip(item) {
-    await deactivateItem(item.id,UserLogged.id)
-    console.log(`Item ${item.id} desactivado`)
+
+
+
+
+async function unequip(itemid) {
+
+    await deactivateItem(itemid,UserLogged.id)
+    console.log(`Item ${itemid} desactivado`)
     UserLogged.updateuser()
     window.location.reload()
 
 }
-async function additem(item){
-    console.log(item)
-    //tiene que comprar el item y agregarlo al inventario del usuario, y restarle los puntos al usuario
-    newitem ={
-     userid: UserLogged.id,
-     itemid: item.id,
-     active: 0   
-    }
-    postItemporUsuario(newitem)
-    UserLogged.updateuser()
-    window.location.reload()
 
+
+
+
+
+//compra item: chequea que el usuario tenga los puntos (los resta) y lo añade al inventario
+async function additem(itemid){
+    item= await getItemporID(itemid)
+    await UserLogged.updateuser()
+    if(UserLogged.points<item.price){
+        alert("No tiene suficientes puntos para comprar esto")
+    }else{
+        if(confirm(`Está seguro de que quiere comprar ${item.name} por $${item.price}?`)){
+            console.log(item)
+            newitem ={
+            userid: UserLogged.id,
+            itemid: item.id,
+            active: 0   
+            }
+            console.log(newitem)
+            await postItemporUsuario(newitem)
+            let pp=UserLogged.points-item.price
+            await putPoints(pp)
+            await UserLogged.updateuser()
+            Window.location.reload()
+
+        }
+    }
 }
 

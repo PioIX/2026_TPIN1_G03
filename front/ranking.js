@@ -8,48 +8,7 @@ async function genTable(){
         <th>ID</th>
 
       </thead>
-      <tr>
-            <td>aaaaa</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-
-        </tr>
-         <tr>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-
-        </tr>
-         <tr>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-
-        </tr>
-         <tr>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-
-        </tr>
-        <tr>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-
-        </tr>
-        <tr>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-            <td>a</td>
-
-        </tr>
+      
       `
  let rank= await getRanking() 
  console.log(rank)
