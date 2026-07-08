@@ -78,11 +78,12 @@ async function verInventario() {
 
 async function borrarUser() {
     let idAdmin = prompt("¿Que ID de usuario desea eliminar?")
-    let objetoUsuarioAux = await getUsuarioporID(idAdmin)
-    let objetoUsuario = objetoUsuarioAux[0]
-    console.log(objetoUsuario)
-    while (idAdmin == "" || objetoUsuario.length == 0) {
-        idAdmin = prompt("Complete con un dato valido.")
+    let objetoUsuario = new Usuario(idAdmin)
+    let userFetch = await getUsuarioporID(idAdmin)
+    while (idAdmin == "" ||  Object.keys(userFetch).length===0) {
+        idAdmin = prompt("Complete el campo con un ID valido.")
+        objetoUsuario = new Usuario(idAdmin)
+        userFetch = await getUsuarioporID(idAdmin)
     }
     deleteUsuario(idAdmin)
     alert("Usuario Borrado.")
@@ -90,10 +91,12 @@ async function borrarUser() {
 
 async function borrarItem() {
     let idAdminItem = prompt("¿Que ID de item desea eliminar?")
-    let objetoItemAux = await getItemporID(idAdminItem)
-    let objetoItem = objetoItemAux[0]
-    while (idAdminItem == "" || objetoItem == undefined) {
+    let objetoItem = new Item(idAdminItem)
+    let itemFetch = await getItemporID(idAdminItem)
+    while (idAdminItem == "" ||  Object.keys(itemFetch).length===0) {
         idAdminItem = prompt("Complete con un dato valido.")
+        objetoItem = new Item(idAdminItem)
+        itemFetch = await getItemporID(idAdminItem)
     }
     deleteItem(idAdminItem)
     alert("Item borrado.")
@@ -147,12 +150,13 @@ async function adminUser() {
 }
 
 async function modItemPrice() {
-    let idAdminItem = prompt("¿Que ID de item desea alterar?")
+    let idAdminItem = prompt("¿Que ID de item desea eliminar?")
     let objetoItem = new Item(idAdminItem)
-    let itemFetchAux = await getItemporID(idAdminItem)
-    let itemFetch = itemFetchAux[0]
-    while (idAdminItem == "" || itemFetch.length == 0) {
-        idAdminItem = prompt("Complete el campo con un ID valido.")
+    let itemFetch = await getItemporID(idAdminItem)
+    while (idAdminItem == "" ||  Object.keys(itemFetch).length===0) {
+        idAdminItem = prompt("Complete con un dato valido.")
+        objetoItem = new Item(idAdminItem)
+        itemFetch = await getItemporID(idAdminItem)
     }
     let newPrice = prompt("Ingrese el nuevo precio de su Item.")
     while (newPrice == "") {
@@ -164,12 +168,13 @@ async function modItemPrice() {
 }
 
 async function modItemImage(){
-    let idAdminItem = prompt("¿Que ID de item desea alterar?")
+    let idAdminItem = prompt("¿Que ID de item desea eliminar?")
     let objetoItem = new Item(idAdminItem)
-    let itemFetchAux = await getItemporID(idAdminItem)
-    let itemFetch = itemFetchAux[0]
-    while (idAdminItem == "" || itemFetch.length == 0) {
-        idAdminItem = prompt("Complete el campo con un ID valido.")
+    let itemFetch = await getItemporID(idAdminItem)
+    while (idAdminItem == "" ||  Object.keys(itemFetch).length===0) {
+        idAdminItem = prompt("Complete con un dato valido.")
+        objetoItem = new Item(idAdminItem)
+        itemFetch = await getItemporID(idAdminItem)
     }
     let newImg = prompt("Ingrese el nuevo archivo de la imagen de su Item.")
     while (newImg == "") {
@@ -226,20 +231,24 @@ async function adminUserNon() {
 
 async function addItemUser() {
     let idAdmin = prompt("¿Que ID de usuario desea añadir el item?")
-    let objetoUsuarioAux = await getUsuarioporID(idAdmin)
-    let objetoUsuario = objetoUsuarioAux[0]
-    while (idAdmin == "" || objetoUsuario.length == 0) {
-        idAdmin = prompt("Complete con un ID valido...")
+    let objetoUsuario = new Usuario(idAdmin)
+    let userFetch = await getUsuarioporID(idAdmin)
+    while (idAdmin == "" ||  Object.keys(userFetch).length===0) {
+        idAdmin = prompt("Complete el campo con un ID valido.")
+        objetoUsuario = new Usuario(idAdmin)
+        userFetch = await getUsuarioporID(idAdmin)
     }
     let idAdminItem = prompt("Escriba el ID del item que le dara al usuario.")
-    let objetoItemAux = await getItemporID(idAdminItem)
-    let objetoItem = objetoItemAux[0]
-    while (idAdminItem == "" || objetoItem.length == 0) {
+    let objetoItem = new Item(idAdminItem)
+    let itemFetch = await getItemporID(idAdminItem)
+    while (idAdminItem == "" ||  Object.keys(itemFetch).length===0) {
         idAdminItem = prompt("Complete con un dato valido.")
+        objetoItem = new Item(idAdminItem)
+        itemFetch = await getItemporID(idAdminItem)
     }
     newItemUser = {
-        itemid: idAdminItem,
         userid: idAdmin,
+        itemid: idAdminItem,
         active: 0
     }
     postItemporUsuario(newItemUser)
@@ -248,19 +257,20 @@ async function addItemUser() {
 
 async function cheatItems() {
     let idAdmin = prompt("¿Que ID de usuario desea alterar?")
-    let objetoUsuarioAux = await getUsuarioporID(idAdmin)
-    let objetoUsuario = objetoUsuarioAux[0]
-    console.log(objetoUsuario)
-    while (idAdmin == "" || objetoUsuario.length == 0) {
-        idAdmin = prompt("Complete con un ID valido...")
+    let objetoUsuario = new Usuario(idAdmin)
+    let userFetch = await getUsuarioporID(idAdmin)
+    while (idAdmin == "" ||  Object.keys(userFetch).length===0) {
+        idAdmin = prompt("Complete el campo con un ID valido.")
+        objetoUsuario = new Usuario(idAdmin)
+        userFetch = await getUsuarioporID(idAdmin)
     }
     let allItems = await getItems()
     for (i=0; i<allItems.length; i++){
         let idAllItems = allItems[i].id
         console.log(idAllItems)
         currentItem = {
-            itemid: idAllItems,
             userid: idAdmin,
+            itemid: idAllItems,
             active: 0
         }
         postItemporUsuario(currentItem)
