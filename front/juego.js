@@ -6,6 +6,7 @@ let winpoints=1
 let tempuser=JSON.parse(sessionStorage.getItem("User"))
 if (tempuser!=null){
   UserLogged= new Usuario(tempuser.id)  
+  UserLogged.updateuser()
 }else{
   UserLogged={}
   }
@@ -249,10 +250,9 @@ async function showstats() {
   if(Object.keys(UserLogged).length === 0 || Object.keys(UserLogged).length === undefined || UserLogged === null){
     document.getElementById("homeaviso").innerText="Inicie sesión para ver sus estadísticas"
   }else{
-    UserLogged.updateuser()
     modal=document.getElementById("dialoguser")
+    UserLogged.updateuser()
     stats= await getEstadistica(UserLogged.id)
-    document.getElementById("h2user").innerText=UserLogged.username
     document.getElementById("statpoints").innerText=UserLogged.points
     document.getElementById("statwins").innerText=stats.wins
     document.getElementById("statlosses").innerText=stats.losses
@@ -265,8 +265,18 @@ async function showstats() {
     document.getElementById("statplayed").innerText=stats.played
     document.getElementById("statlostpoints").innerText=stats.points_lost
     document.getElementById("statitems").innerText=stats.cant_items
+    document.getElementById("h2user").innerText=UserLogged.username
+
     modal.showModal();
-    
+
   }
 
+}
+
+function handletienda(){
+  if(Object.keys(UserLogged).length === 0 || Object.keys(UserLogged).length === undefined || UserLogged === null){
+    document.getElementById("homeaviso").innerText="Inicie sesión para ir a la tienda"
+  }else{
+    window.location.href='tienda.html';
+  }
 }

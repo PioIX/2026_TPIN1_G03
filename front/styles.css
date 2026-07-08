@@ -3,6 +3,9 @@ verde fondo - #236749
 botones (naranja)- #8f534c
 gris- #343232
 gris claro - #585757
+verde oscuro carta - #637f67
+verde claro carta - #b7c09a
+
 
 fuentes:
 font-family: "Tiny5", sans-serif;
@@ -319,7 +322,7 @@ background-color: #8f534c;
 
 }
 #buttonstand{
-background-color: #585757;
+background-color: #637f67;
 }
 
 
@@ -344,7 +347,8 @@ background-color: #585757;
     align-items: center;
     text-align: center;
     justify-content: center;
-    
+    height: 100%;
+    width: 100%;
 }
 #titlerank{
     width: 100%;
@@ -358,12 +362,11 @@ background-color: #585757;
     font-size: 60px;
     border-collapse: separate;
     border-spacing: 130px 20px;
-
+    table-layout: fixed;
+    height: 100%;
 }
 
-tr:nth-child(even) {
-  background-color: black;
-}
+
 thead th{
   position: sticky;
   top: 0;
@@ -415,6 +418,10 @@ thead th{
     width: 70vw;
     border-radius: 15px;
     border: 1px solid black;
+    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    
 
 }
 
@@ -426,9 +433,59 @@ thead th{
 #btnleave2{
     
     button{ 
-    height: 80px;
-    width: 200px;
-    font-size: 50px;
+    height: 50px;
+    width: 180px;
+    font-size: 40px;
+    margin-bottom: 5vh;
+    align-self: flex-end;
     background-color: #8f534c;
+    }
+}
+#listas{
+    flex-grow: 1;
+    justify-content: center;
+    text-align: center;
+    height: 40vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: black #585757;
+    h2{
+        margin-top: 2vh;
+        font-size: 40px;
+    }
+    button{
+        font-size: 30px;
+        background-color: #637f67;
+    }
+}
+#titems{
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0 50px;
+    height: 30vh;
+    overflow-y: auto;
+    
+     font-size: 30px;
+    td{
+        width: 33%;
+        
+
+    }
+}
+#tbackgrounds{
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0 50px;
+    height: 30vh;
+    overflow-y: auto;
+    
+     font-size: 30px;
+    td{
+        width: 33%;
+        
+
     }
 }

@@ -7,9 +7,54 @@ async function genTable(){
         <th>Puntaje</th>
         <th>ID</th>
 
-      </thead>`
+      </thead>
+      <tr>
+            <td>aaaaa</td>
+            <td>a</td>
+            <td>a</td>
+            <td>a</td>
+
+        </tr>
+         <tr>
+            <td>a</td>
+            <td>a</td>
+            <td>a</td>
+            <td>a</td>
+
+        </tr>
+         <tr>
+            <td>a</td>
+            <td>a</td>
+            <td>a</td>
+            <td>a</td>
+
+        </tr>
+         <tr>
+            <td>a</td>
+            <td>a</td>
+            <td>a</td>
+            <td>a</td>
+
+        </tr>
+        <tr>
+            <td>a</td>
+            <td>a</td>
+            <td>a</td>
+            <td>a</td>
+
+        </tr>
+        <tr>
+            <td>a</td>
+            <td>a</td>
+            <td>a</td>
+            <td>a</td>
+
+        </tr>
+      `
  let rank= await getRanking() 
+ console.log(rank)
  for (i=0;i<rank.length;i++){
+  console.log(rank[i].username)
     document.getElementById("ranktable").innerHTML+= `<tr>
     <td>${i+1}</td>
     <td>${rank[i].username}</td>
