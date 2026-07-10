@@ -1,4 +1,3 @@
-window.addEventListener("load", genItems());
 
 let temppuser=JSON.parse(sessionStorage.getItem("User"))
 if (temppuser!=null){
@@ -194,6 +193,58 @@ async function additem(itemid){
             await UserLogged.updateuser()
             Window.location.reload()
 
+        }
+    }
+}
+
+
+async function itemCheck() {
+    const bod = document.body
+    const its=document.getElementsByClassName("decoration")
+    const title=document.getElementById("titleh1")
+    if (!(Object.keys(UserLogged).length === 0 || Object.keys(UserLogged).length === undefined || UserLogged === null)){
+        bgs=[]
+        items=[]
+        let iteminv={}
+        let bginv={}
+        let getitems= await getItems()
+        let invent= await getInventario(UserLogged.id) || []
+
+        for (i=0;i<getitems.length;i++){
+            if (!getitems[i].name.includes("Fondo")){
+                items.push(getitems[i])
+            }else{
+                bgs.push(getitems[i])
+            }
+        }
+        for (i=0;i<bgs.length;i++){
+            for(j=0;j<invent.length;j++){
+                if(bgs[i].id ==invent[j].itemid && invent[j].active){
+                    bginv=bgs[i]
+                    console.log(bginv)
+
+                }
+            }
+        }
+        for (i=0;i<items.length;i++){
+            for(j=0;j<invent.length;j++){
+                if(items[i].id ==invent[j].itemid && invent[j].active){
+                    iteminv=items[i]
+                    console.log(iteminv)
+                }
+            }
+        }
+
+        bod.style.backgroundImage = `url(${bginv.imgsrc})`
+        for (i=0;i<its.length;i++){
+            its[i].innerHTML=`<img src="${iteminv.imgsrc}" alt="">`
+        }
+
+
+    }else{
+        bod.style.backgroundImage = url('img/bg/def.png')
+        for (i=0;i<its.length;i++){
+            its[i].innerHTML=``
         }
     }
 }

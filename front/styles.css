@@ -41,7 +41,15 @@ dialog{
     }
 }
 
-
+span { 
+    align-items: center;
+img{
+    height: 20px;
+    align-self: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+}
 
 
 
@@ -71,6 +79,9 @@ dialog{
     margin-bottom: 5vh;
     font-size: 100px;
     font-family: "Jacquard 12", system-ui;
+    h1{
+        text-shadow: 2px 0 white, -2px 0 white, 0 2px white, 0 -2px white, 1px 1px white, -1px -1px white, -1px 1px white, 1px -1px white;
+    }
 
     
 }
@@ -80,7 +91,6 @@ dialog{
     justify-content: center;
     align-content: center;
     button{
-        background-color: #585757;
             font-family: "Jersey 10", sans-serif;
 
     }
@@ -93,6 +103,7 @@ dialog{
         height: 50px;
         width: 120px;
         font-size: 25px;
+        background-color: #8f534c;
 
     }
 }
@@ -104,6 +115,8 @@ dialog{
         height: 50px;
         width: 120px;
         font-size: 25px;
+        background-color: #8f534c;
+
     }
 
 
@@ -118,6 +131,7 @@ dialog{
         height: 100px;
         width: 220px;
         font-size: 50px;
+        background-color:#585757;
     }
     
 
@@ -159,10 +173,14 @@ dialog{
     }
 
 }
-
+#divdialog{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 #dialoguser{
     h2{
-    margin: 2rem;
+        margin: 1rem;
        margin-bottom: 3rem;
        font-size: 64px;
        padding-bottom: 2rem;
@@ -177,7 +195,7 @@ dialog{
         justify-self: center;
     }
     button{
-        margin-top: 2rem;
+        margin-top: 2vh;
         height: 50px;
         width: 150px;
         font-size: 32px;
@@ -192,6 +210,8 @@ dialog{
         width: 100%;
         gap: 4rem;
         justify-content: space-between;
+        align-items: end;
+        padding-bottom: 1vh;
     }
     #stats{
         width: auto;
@@ -230,8 +250,13 @@ dialog{
     white-space: nowrap;
 }
 .infp{
-    margin-right: 5rem;
+    margin-right: 3rem;
     font-size: 50px;
+    background-color: #637f67;
+    padding: 10px;
+    border: 3px solid #343232;
+    border-radius: 3px;
+    text-align: center;
 }
 
 #game{
@@ -244,7 +269,7 @@ dialog{
 #pss{
     display: grid;
     align-items: center;
-    margin-left: 6rem;
+    margin-left: 3rem;
     align-self: left;
 }
 #win{
@@ -347,7 +372,7 @@ background-color: #637f67;
     align-items: center;
     text-align: center;
     justify-content: center;
-    height: 100%;
+    height: 100vh;
     width: 100%;
 }
 #titlerank{
@@ -355,6 +380,7 @@ background-color: #637f67;
     text-align: center;
     margin-top: 2vh;
     font-size: 64px;
+    
 }
 /*
 #titles{
@@ -368,7 +394,6 @@ background-color: #637f67;
 */
 #ranktable{
     width:100%;
-
     align-self: center;
     justify-self: center;
     justify-content: center;
@@ -376,6 +401,7 @@ background-color: #637f67;
     border-collapse: separate;
     overflow-y: scroll;
     table-layout: fixed; 
+    padding-top: 60vh;
 }
 
 #divtable{
@@ -391,7 +417,6 @@ background-color: #637f67;
     margin-bottom: 5vh;
     scrollbar-width: thin;
     scrollbar-color: black #236749;
-    padding-top: 25vh; 
 
 }
 #btnleave{

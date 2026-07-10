@@ -25,7 +25,7 @@ async function handleSignup(){
         coincidencia=true
     }
     console.log("coincidencia: ",coincidencia)
-    while (respuestaUsername == "" || coincidencia == true) {
+    while (!respuestaUsername || coincidencia == true) {
         respuestaUsername = prompt("Valor en uso o vacio. Por favor, ingrese uno nuevo...")
         leerUsername = await getUsuarioporUsername(respuestaUsername)
         if (!leerUsername || Object.keys(leerUsername).length===0){
@@ -35,7 +35,7 @@ async function handleSignup(){
         }
     }
     let respuestaPassword = prompt("Ingrese su contraseña deseada...")
-    while (respuestaPassword === ""){
+    while (!respuestaPassword){
         respuestaPassword = prompt("Valor vacio. Completelo...")
     }
     
@@ -52,7 +52,11 @@ async function handleSignup(){
     createduser = await getUsuarioporUsername(respuestaUsername)
     console.log(createduser.id)
     await postEstadistica(createduser.id)
-    return newUsuario.id
+    UserLogged = new Usuario(createduser.id)
+    UserLogged.updateuser()
+    sessionStorage.setItem("User",JSON.stringify(UserLogged))
+    window.location.reload()
+
 }
 
 async function handleLogin(){
@@ -97,6 +101,7 @@ async function logout() {
         sessionStorage.setItem("User",null)
         UserLogged = {}
         alert("Sesión cerrada")
+        window.location.reload()
     }
 
 }

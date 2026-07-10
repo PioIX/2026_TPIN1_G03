@@ -17,8 +17,8 @@
 <body id="juego">
   <section id="game">
 <div id="pss">
-      <p id="infdealer" class="infp">Dealer: <span id="sumadealer"></span></p>
-<p id="infuser" class="infp">Vos: <span id="sumauser"></span></p>
+      <p id="infdealer" class="infp"><span class="decoration"></span>Dealer: <span id="sumadealer"></span><span class="decoration"></span></p>
+<p id="infuser" class="infp"><span class="decoration"></span>Vos: <span id="sumauser"></span><span class="decoration"></span></p>
   </div>
 
   <div id="cardsec">
@@ -41,9 +41,9 @@
 
     <dialog id="win">
   <h2>Ganaste!</h2>
-  <p>Dealer: <span id="sumadealer1"></span></p>
-  <p>Vos: <span id="sumauser1"></span></p>
-  <p>Tu dinero: <span id="points1"></span></p>
+  <p><span class="decoration"></span>Dealer: <span id="sumadealer1"></span></p>
+  <p><span class="decoration"></span>Vos: <span id="sumauser1"></span></p>
+  <p><span class="decoration"></span>Tu dinero: <span id="points1"></span></p>
   <div class="dialgbtns">
     <button id="reload" onclick="replay()">Volver a jugar</button>
     <button id="home" onclick="window.location.href='index.html';">Home</button>
@@ -55,9 +55,9 @@
 
 <dialog id="lose">
   <h2>Perdiste</h2>
-  <p>Dealer: <span id="sumadealer2"></span></p>
-  <p>Vos: <span id="sumauser2"></span></p>
-  <p>Tu dinero: <span id="points2"></span></p>
+  <p><span class="decoration"></span>Dealer: <span id="sumadealer2"></span></p>
+  <p><span class="decoration"></span>Vos: <span id="sumauser2"></span></p>
+  <p><span class="decoration"></span>Tu dinero: <span id="points2"></span></p>
   <p id="avisonopoints"></p>
     <div class="dialgbtns">
       <button id="reload" onclick="replay()">Volver a jugar</button>
@@ -70,7 +70,14 @@
     <script src="items.js"></script>
     <script src="logic.js"></script>
     <script src="juego.js"></script>
-    
+    <script src="tienda.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", itemCheck());
+      </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", iraljuego());
+  </script>
     
 </body>
 </html>
