@@ -386,6 +386,8 @@ thead th{
     
 }
 
+/* ADMIN */
+
 .admin_h {
     font-family: "Jersey 10", sans-serif;
     font-weight: 300;
@@ -416,14 +418,16 @@ thead th{
 #admin_table {
     display: flex;
     margin-left: 7rem;
+    margin-right: 7rem;
+    font-size: 30px;
 }
 
 .divTabla {
     display: flex;
-
     padding-left: 1rem;
-    padding-right: 1rem
+    padding-right: 1rem;
 }
+
 .admin_tr {
     border: #236749 solid 2px;
 }
@@ -433,9 +437,17 @@ thead th{
     margin-left: 7rem;
     font-family: "Jersey 10", sans-serif;
     font-weight: 300;
+    font-size: 45px;
 }
 
 #admin_body {
     background-color: black;
     color: #236749;
+    overflow: visible;
+    button{
+        height: auto;
+        width: auto ;
+        font-size: 50px;
+        color:black
+    };
 }

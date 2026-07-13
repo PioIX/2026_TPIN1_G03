@@ -2,6 +2,7 @@ async function verUsers() {
     const tabla = await getUsuarios()
     let elementosLista = ""
     document.getElementById("ListaDeUsers").innerHTML=`
+    <h3>Usuarios</h3>
     <tr>
         <th>ID</th>
         <th>Username</th>
@@ -30,6 +31,7 @@ async function verItems() {
     const tabla = await getItems()
     let elementosLista = ""
     document.getElementById("ListaDeItems").innerHTML=`
+    <h3>Items</h3>
     <tr>
         <th>ID</th>
         <th>Name</th>
@@ -56,6 +58,7 @@ async function verInventario() {
     const tabla = await getItemsporUsuario()
     let elementosLista = ""
     document.getElementById("ListaDeInventarios").innerHTML=`
+    <h3>Inventario</h3>
     <tr>
         <th>ID User</th>
         <th>ID Item</th>
