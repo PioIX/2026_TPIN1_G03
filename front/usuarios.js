@@ -19,7 +19,6 @@ class Usuario{
         this.points=parseInt(newuser.points)
         this.items=inv
         console.log(this)
-
     }
 }
 
