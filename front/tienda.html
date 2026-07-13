@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Jersey+10&family=Tiny5&display=swap" rel="stylesheet">
+
+
+</head>
+<body id="bodytienda">
+
+    <section id="sectienda">
+        <div id="titletienda">
+            <h1>Tienda</h1>
+               </div>
+               <h2 id="puntost"><span class="decoration"></span>Tus puntos: <span id="userpoints2"></span><span class="decoration"></span></h2>
+               <div id="listas">
+                <div id="t1">
+                    <h2><span class="decoration"></span>Decoraciones de texto<span class="decoration"></span></h2>
+                    <table id="titems">
+                        
+                        <tr>
+                            <td>Nombre</td>
+                            <td> </td>
+    
+                            <td>
+                               <p>Equipado:</p> 
+                                <img src="${items[i].imgsrc}" alt="item">
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <div id="t2">
+                    <h2><span class="decoration"></span>Fondos<span class="decoration"></span></h2>
+                    <table id="tbackgrounds">
+                        <tr>
+                            <td>aa</td>
+                            <td>aa</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                
+
+               </div>
+            
+
+        <div id="btnleave2">
+        <button id="leavetienda" onclick="window.location.href='index.html';">Volver</button>
+
+        </div>
+
+    </section>
+
+
+ 
+   
+
+
+    
+   
+
+    <script src="fetch.js"></script>
+    <script src="usuarios.js"></script>
+    <script src="blackjack.js"></script>
+    <script src="items.js"></script>
+    <script src="logic.js"></script>
+    <script src="juego.js"></script>
+    <script src="tienda.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", genItems());
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", itemCheck());
+    </script>
+
+</body>
+</html>

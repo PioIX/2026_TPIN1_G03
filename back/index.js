@@ -205,6 +205,7 @@ app.post('/Items', async function(req, res){
 app.post('/ItemsporUsuario', async function(req, res){
 	try {
 		console.log(req.body);
+		console.log(req.body.userid);
 		existe = await MySQL.realizarQuery(`SELECT * FROM ItemsporUsuario WHERE userid=${req.body.userid} AND itemid=${req.body.itemid};`)
 		if (existe.length===0){
 			await MySQL.realizarQuery(`INSERT INTO ItemsporUsuario (userid,itemid,active)

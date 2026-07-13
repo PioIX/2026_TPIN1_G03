@@ -6,8 +6,8 @@ class Blackjack{
         this.ace11deal = false,
         this.ace11user=false,
         this.dealcards= [],
-   this.usercards = [],
-   this.userturn = true
+        this.usercards = [],
+        this.userturn = true
    
    
    

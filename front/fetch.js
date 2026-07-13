@@ -114,7 +114,7 @@ async function getInventario(userID) {
       const response = await res.json() 
       console.log(response) 
       console.log(response.message.length)
-      return response.message[0]
+      return response.message
     } catch (error) {
       console.log('Error:', error.message)
     }

@@ -3,6 +3,9 @@ verde fondo - #236749
 botones (naranja)- #8f534c
 gris- #343232
 gris claro - #585757
+verde oscuro carta - #637f67
+verde claro carta - #b7c09a
+
 
 fuentes:
 font-family: "Tiny5", sans-serif;
@@ -19,6 +22,8 @@ font-family: "Jersey 10", sans-serif;
 }
 body{
     margin: 0px;
+    width: 100%;
+    height: 100vh;
 }
 
 dialog{
@@ -34,24 +39,43 @@ dialog{
     button{
         background-color: #8f534c;
     }
+    
 }
 
+span { 
+    align-items: center;
+img{
+    height: 20px;
+    align-self: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+}
+button:hover {
+  box-shadow: 2px 2px 0px 0px black;
+}
 
-
-
-
+.decoration{
+    img{
+        
+        height: 25px;
+    }
+}
 
 /*INDEX*/
 #headerhome{
     text-align: right;
-    margin-top: 2rem;
-    margin-right: 3rem;
+    padding-top: 5vh;
+    padding-right: 3rem;
 
     button{
-        background-color: #8f534c;
         height: 50px;
         width: 50px;
         margin-left: 1rem;
+        
+    }
+    button:hover {
+    box-shadow: 0px 2px 0px 0px black;
     }
 
 }
@@ -62,10 +86,13 @@ dialog{
     
 }
 #title{
-    margin: 5rem;
-    margin-top: 10rem;
+    margin-top: 15vh;   
+    margin-bottom: 5vh;
     font-size: 100px;
     font-family: "Jacquard 12", system-ui;
+    h1{
+        text-shadow: 2px 0 white, -2px 0 white, 0 2px white, 0 -2px white, 1px 1px white, -1px -1px white, -1px 1px white, 1px -1px white;
+    }
 
     
 }
@@ -75,11 +102,25 @@ dialog{
     justify-content: center;
     align-content: center;
     button{
-        background-color: #585757;
             font-family: "Jersey 10", sans-serif;
 
     }
 }
+#btnlogout{
+    background-image: url(img/icons/salir.png);
+    background-color: transparent;
+      background-size: cover; 
+      border: none;
+
+}
+#btnprofile{
+    background-image: url(img/icons/usuario.png);
+    background-color: transparent;
+      background-size: cover; 
+      border: none;
+
+}
+
 #lr{
 
     justify-self: left;
@@ -88,6 +129,7 @@ dialog{
         height: 50px;
         width: 120px;
         font-size: 25px;
+        background-color: #8f534c;
 
     }
 }
@@ -99,6 +141,8 @@ dialog{
         height: 50px;
         width: 120px;
         font-size: 25px;
+        background-color: #8f534c;
+
     }
 
 
@@ -113,6 +157,7 @@ dialog{
         height: 100px;
         width: 220px;
         font-size: 50px;
+        background-color:#585757;
     }
     
 
@@ -120,13 +165,13 @@ dialog{
 
 #homeaviso{
     font-size: 32px;
-    margin-top: 1rem;
+    margin-top: 1vh;
 }
 #dialogpoints{
     
     h2{
     margin: 3rem;
-       margin-bottom: 3rem;
+       margin-bottom: 5vh;
        font-size: 32px;
        padding-bottom: 2rem;
        border-bottom: 2px solid #343232;
@@ -154,15 +199,19 @@ dialog{
     }
 
 }
-
+#divdialog{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 #dialoguser{
     h2{
-    margin: 2rem;
-       margin-bottom: 3rem;
+        margin: 1rem;
+       margin-bottom: 1rem;
        font-size: 64px;
        padding-bottom: 2rem;
        border-bottom: 2px solid #343232;
-;
+
        
     }
     
@@ -172,7 +221,7 @@ dialog{
         justify-self: center;
     }
     button{
-        margin-top: 2rem;
+        margin-top: 2vh;
         height: 50px;
         width: 150px;
         font-size: 32px;
@@ -187,13 +236,14 @@ dialog{
         width: 100%;
         gap: 4rem;
         justify-content: space-between;
+        align-items: end;
+        padding-bottom: 1vh;
     }
     #stats{
         width: auto;
         justify-self: center;   
     }
 }
-
 
 
 /*JUEGO*/
@@ -221,8 +271,13 @@ dialog{
     white-space: nowrap;
 }
 .infp{
-    margin-right: 5rem;
+    margin-right: 3rem;
     font-size: 50px;
+    background-color: #637f67;
+    padding: 10px;
+    border: 3px solid #343232;
+    border-radius: 3px;
+    text-align: center;
 }
 
 #game{
@@ -231,10 +286,11 @@ dialog{
     width: 100%;
     justify-items: center;
 }
+
 #pss{
     display: grid;
     align-items: center;
-    margin-left: 6rem;
+    margin-left: 3rem;
     align-self: left;
 }
 #win{
@@ -287,11 +343,19 @@ margin-left: 3rem;
     justify-content: left;
     padding-left: 3rem;
     button{
-        background-color: #8f534c;
         height: 50px;
-        width: 70px;
+        width: 50px;
         
     }
+    button:hover {
+    box-shadow: 0px 2px 0px 0px black;
+    }
+}
+.volver{
+    background-image: url(img/icons/volver.png);
+    background-color: transparent;
+    background-size: cover; 
+    border: none;
 }
 #hitstand{
     display: flex;
@@ -312,7 +376,7 @@ background-color: #8f534c;
 
 }
 #buttonstand{
-background-color: #585757;
+background-color: #637f67;
 }
 
 
@@ -337,41 +401,53 @@ background-color: #585757;
     align-items: center;
     text-align: center;
     justify-content: center;
-    
+    height: 100vh;
+    width: 100%;
 }
 #titlerank{
     width: 100%;
     text-align: center;
-    margin-top: 3rem;
+    margin-top: 2vh;
     font-size: 64px;
+    
 }
+/*
+#titles{
+    display: flex;
+    flex-direction: row;
+    font-size: 60px;
+    width: 100vw;
+    padding-left: 13vw;
+    padding-right: 18vw;
+}
+*/
 #ranktable{
+    width:100%;
     align-self: center;
     justify-self: center;
+    justify-content: center;
     font-size: 60px;
     border-collapse: separate;
-    border-spacing: 150px 20px;
-
+    overflow-y: scroll;
+    table-layout: fixed; 
+    padding-top: 60vh;
 }
 
-thead th{
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  background-color: #236749;
-}
+
 #divtable{
     display: flex;
-    width: 100%;
-    height: 350px;
+    width: 80%;
+    height: 60vh;
     overflow-y: auto;
     justify-content: center;
     align-items: center;
     text-align: center;
-        margin-top: 2rem;
-    margin-bottom: 5rem;
+    justify-self: center;
+    margin-top: 1vh;
+    margin-bottom: 5vh;
     scrollbar-width: thin;
     scrollbar-color: black #236749;
+
 }
 #btnleave{
     justify-self: center;
@@ -386,6 +462,125 @@ thead th{
     
 }
 
+
+
+
+/*TIENDA*/
+#bodytienda{
+    background-color: #236749;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    
+}
+#sectienda{
+    background-color: #585757;
+    height: 80vh;
+    width: 70vw;
+    border-radius: 15px;
+    border: 1px solid black;
+    justify-items: center;
+    display: flex;
+    flex-direction: column;
+    
+
+}
+#puntost{
+    font-size: 40px;
+}
+#titletienda{
+    font-size: 50px;
+    margin: 5vh;
+    border-bottom: 3px solid #343232;
+}
+#btnleave2{
+    
+    button{ 
+    height: 50px;
+    width: 180px;
+    font-size: 40px;
+    margin-bottom: 3vh;
+    margin-top: 5vh;
+
+    align-self: flex-end;
+    background-color: #8f534c;
+    }
+}
+#listas{
+    flex-grow: 1;
+    justify-content: center;
+    text-align: center;
+    height: 40vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: black #585757;
+    h2{
+        margin-top: 2vh;
+        margin-bottom: 1vh;
+        font-size: 40px;
+        width: 80%;
+        justify-self: center;
+    }
+    button{
+        font-size: 30px;
+    }
+    table{
+        background-color: #7e7e7e;
+        border: 2px solid #343232;
+        width: 80%;
+        justify-self: center;
+        tr{
+            border-bottom: 2px solid #343232;
+        }
+    }
+}
+#titems{
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0 50px;
+    height: 30vh;
+    overflow-y: auto;
+    
+     font-size: 30px;
+    td{
+        width: 33%;
+        
+
+    }
+}
+#tbackgrounds{
+    width: 100%;
+    border-collapse: separate; 
+    border-spacing: 0 50px;
+    height: 30vh;
+    overflow-y: auto;
+    
+     font-size: 30px;
+    td{
+        width: 33%;
+        
+
+    }
+}
+
+.equip{
+    background-color: #637f67;
+}
+.equipped{
+    background-color: #343232;
+}
+.buyitem{
+    background-color: #8f534c;
+}
+
+
+.storespr{
+    height: 80px;
 /* ADMIN */
 
 .admin_h {

@@ -6,10 +6,13 @@ let winpoints=1
 let tempuser=JSON.parse(sessionStorage.getItem("User"))
 if (tempuser!=null){
   UserLogged= new Usuario(tempuser.id)  
+  UserLogged.updateuser()
 }else{
   UserLogged={}
-  }
+}
 
+const buttonhit = document.getElementById("buttonhit");
+const buttonstand = document.getElementById("buttonstand");
 
 const cartasrefP = [
   "img/cartas/AV.png",
@@ -39,14 +42,12 @@ const cartasrefD = [
   "img/cartas/100.png",
   "img/cartas/J0.png",
   "img/cartas/Q0.png",
-  "img/cartas/K0.png",
+  "img/cartas/KV.png",
 
 
 ];
-const buttonhit = document.getElementById("buttonhit");
-const buttonstand = document.getElementById("buttonstand");
-window.addEventListener("load", iraljuego());
 
+//CHEQUEA LOGIN Y MANEJA APUESTA
 async function handleir(){
   let tempuser=JSON.parse(sessionStorage.getItem("User"))
   if (tempuser!=null){
@@ -73,11 +74,12 @@ async function handleir(){
     
     })
   }
-  
-  
 }
+
+//CREA UN JUEGO NUEVO
 async function iraljuego() {
-  
+  document.getElementById("buttonhit").disabled=false
+  document.getElementById("buttonstand").disabled=false
   UserLogged.updateuser()
   console.log(UserLogged)
   console.log("points: ")
@@ -91,7 +93,7 @@ async function iraljuego() {
 }
 
 
-
+//FUNCIONES PROPIAS DEL JUEGO
 function actualizarUser() {
   let carta = 0;
   document.getElementById("cartasuser").innerHTML=`<div id="cartasuser"></div>`
@@ -182,16 +184,15 @@ function replay(){
   winpoints=sessionStorage.getItem("winpoints")
    if ((UserLogged.points<winpoints && !(UserLogged.points<=0 && winpoints==1)) || winpoints==0){
     document.getElementById("avisonopoints").innerText="No puede continuar con la misma apuesta. Vuelva y seleccione una nueva cantidad."
-
- //mostrar modal que dice que no se puede continuar con la misma apuesta
    }else{
     window.location.reload();
    }
   
 }
 
-
 async function win(){
+  document.getElementById("buttonhit").disabled=true
+  document.getElementById("buttonstand").disabled=true
   winpoints=sessionStorage.getItem("winpoints")
   estad= await getEstadistica(UserLogged.id)
   newestad={
@@ -216,8 +217,9 @@ async function win(){
   modal.showModal();
 }
 
-
 async function lose(){
+  document.getElementById("buttonhit").disabled=true
+  document.getElementById("buttonstand").disabled=true
   winpoints=sessionStorage.getItem("winpoints")
   UserLogged.points-=parseInt(winpoints)
   console.log(UserLogged)
@@ -240,14 +242,17 @@ async function lose(){
   modal.showModal();
 }
 
+
+
+
+//PERFIL DE USUARIO
 async function showstats() {
   if(Object.keys(UserLogged).length === 0 || Object.keys(UserLogged).length === undefined || UserLogged === null){
     document.getElementById("homeaviso").innerText="Inicie sesión para ver sus estadísticas"
   }else{
-    UserLogged.updateuser()
     modal=document.getElementById("dialoguser")
+    UserLogged.updateuser()
     stats= await getEstadistica(UserLogged.id)
-    document.getElementById("h2user").innerText=UserLogged.username
     document.getElementById("statpoints").innerText=UserLogged.points
     document.getElementById("statwins").innerText=stats.wins
     document.getElementById("statlosses").innerText=stats.losses
@@ -260,8 +265,20 @@ async function showstats() {
     document.getElementById("statplayed").innerText=stats.played
     document.getElementById("statlostpoints").innerText=stats.points_lost
     document.getElementById("statitems").innerText=stats.cant_items
+    document.getElementById("h2user").innerText=UserLogged.username
+
     modal.showModal();
-    
+
   }
 
+}
+
+
+//CHEQUEAR LOGIN PARA TIENDA
+function handletienda(){
+  if(Object.keys(UserLogged).length === 0 || Object.keys(UserLogged).length === undefined || UserLogged === null){
+    document.getElementById("homeaviso").innerText="Inicie sesión para ir a la tienda"
+  }else{
+    window.location.href='tienda.html';
+  }
 }
