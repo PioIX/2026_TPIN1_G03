@@ -160,6 +160,7 @@ button:hover {
         background-color:#585757;
     }
     
+    
 
 }
 
@@ -205,6 +206,7 @@ button:hover {
     align-items: center;
 }
 #dialoguser{
+    overflow: hidden;
     h2{
         margin: 1rem;
        margin-bottom: 1rem;
