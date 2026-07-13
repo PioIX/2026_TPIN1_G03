@@ -14,7 +14,9 @@ let bgs=[]
 async function genItems(){
     let bog=false
     let invitem={}
+    await UserLogged.updateuser()
     //carga items y fondos y separa
+
     document.getElementById("userpoints2").innerText=UserLogged.points  
 
     document.getElementById("titems").innerHTML = ``
@@ -42,7 +44,6 @@ async function genItems(){
         }
         
     }
-    console.log(items[i])
 
     if(bog && invitem.active==0){
         document.getElementById("titems").innerHTML+= `
@@ -113,7 +114,6 @@ for (i=0;i<bgs.length;i++){
         Comprar
         </button>
         </td>`
-        console.log(bgs[i])
 
 
     }
@@ -189,9 +189,9 @@ async function additem(itemid){
             console.log(newitem)
             await postItemporUsuario(newitem)
             let pp=UserLogged.points-item.price
-            await putPoints(pp)
+            await putPoints(pp,UserLogged.id)
             await UserLogged.updateuser()
-            Window.location.reload()
+            window.location.reload()
 
         }
     }
@@ -199,6 +199,7 @@ async function additem(itemid){
 
 
 async function itemCheck() {
+    await UserLogged.updateuser()
     const bod = document.body
     const its=document.getElementsByClassName("decoration")
     const title=document.getElementById("titleh1")
@@ -237,10 +238,35 @@ async function itemCheck() {
 
         bod.style.backgroundImage = `url(${bginv.imgsrc})`
         for (i=0;i<its.length;i++){
-            its[i].innerHTML=`<img src="${iteminv.imgsrc}" alt="">`
+            console.log(iteminv.name)
+            if (iteminv.name=="Pipi"){
+                
+                its[i].innerHTML=`<img src="" alt="">`
+
+                if(UserLogged.points<10){
+                    console.log("huevo")
+                    its[i].innerHTML=`<img src="img/spr/pipihuevo.png" alt="">`
+                }else if(UserLogged.points<25){
+                      console.log("medio")
+
+                    its[i].innerHTML=`<img src="img/spr/pipimedio.png" alt="">`
+                }else if(UserLogged.points<50){
+                      console.log("normal")
+
+                    its[i].innerHTML=`<img src="img/spr/pipinormal.png" alt="">`
+                }else if(UserLogged.points<150){
+                      console.log("amor")
+                    its[i].innerHTML=`<img src="img/spr/pipiamor.png" alt="">`
+                }
+                
+            
+            }else{
+                its[i].innerHTML=`<img src="${iteminv.imgsrc}" alt="">`
+            }
+            
+            
         }
-
-
+        
     }else{
         bod.style.backgroundImage = url('img/bg/def.png')
         for (i=0;i<its.length;i++){

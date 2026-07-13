@@ -55,7 +55,12 @@ button:hover {
   box-shadow: 2px 2px 0px 0px black;
 }
 
-
+.decoration{
+    img{
+        
+        height: 25px;
+    }
+}
 
 /*INDEX*/
 #headerhome{
@@ -202,11 +207,11 @@ button:hover {
 #dialoguser{
     h2{
         margin: 1rem;
-       margin-bottom: 3rem;
+       margin-bottom: 1rem;
        font-size: 64px;
        padding-bottom: 2rem;
        border-bottom: 2px solid #343232;
-;
+
        
     }
     
