@@ -433,6 +433,8 @@ background-color: #637f67;
     overflow-y: scroll;
     table-layout: fixed; 
     padding-top: 60vh;
+    background-color: #585757;
+    border: 4px solid #343232;
 }
 
 

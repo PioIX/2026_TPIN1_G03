@@ -43,7 +43,7 @@ async function handleSignup(){
     let newUsuario={
         username: respuestaUsername,
         password: respuestaPassword,
-        points: 0,
+        points: 10,
         is_admin: 0
     }
     console.log(newUsuario)
@@ -77,6 +77,7 @@ async function handleLogin(){
         await UserLogged.updateuser()
         sessionStorage.setItem("User",JSON.stringify(UserLogged))
         tryAdmin()
+        window.location.reload()
     } else {
         alert("Usuario no encontrado. Vuelva a intentarlo.")
     }
