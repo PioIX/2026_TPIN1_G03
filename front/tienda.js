@@ -237,6 +237,9 @@ async function itemCheck() {
         }
 
         bod.style.backgroundImage = `url(${bginv.imgsrc})`
+        bod.style.backgroundSize = "cover";         
+        bod.style.backgroundRepeat = "no-repeat"; 
+        bod.style.backgroundPosition = "center";    
         for (i=0;i<its.length;i++){
             console.log(iteminv.name)
             if (iteminv.name=="Pipi"){
