@@ -240,21 +240,21 @@ async function itemCheck() {
         for (i=0;i<its.length;i++){
             console.log(iteminv.name)
             if (iteminv.name=="Pipi"){
-                
+
                 its[i].innerHTML=`<img src="" alt="">`
 
-                if(UserLogged.points<10){
+                if(UserLogged.points<5){
                     console.log("huevo")
                     its[i].innerHTML=`<img src="img/spr/pipihuevo.png" alt="">`
-                }else if(UserLogged.points<25){
+                }else if(UserLogged.points<10){
                       console.log("medio")
 
                     its[i].innerHTML=`<img src="img/spr/pipimedio.png" alt="">`
-                }else if(UserLogged.points<50){
+                }else if(UserLogged.points<20){
                       console.log("normal")
 
                     its[i].innerHTML=`<img src="img/spr/pipinormal.png" alt="">`
-                }else if(UserLogged.points<150){
+                }else if(UserLogged.points<40){
                       console.log("amor")
                     its[i].innerHTML=`<img src="img/spr/pipiamor.png" alt="">`
                 }
