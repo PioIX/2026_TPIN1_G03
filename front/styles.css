@@ -39,6 +39,7 @@ dialog{
     button{
         background-color: #8f534c;
     }
+    
 }
 
 span { 
@@ -50,7 +51,9 @@ img{
     padding-right: 10px;
 }
 }
-
+button:hover {
+  box-shadow: 2px 2px 0px 0px black;
+}
 
 
 
@@ -61,10 +64,13 @@ img{
     padding-right: 3rem;
 
     button{
-        background-color: #8f534c;
         height: 50px;
         width: 50px;
         margin-left: 1rem;
+        
+    }
+    button:hover {
+    box-shadow: 0px 2px 0px 0px black;
     }
 
 }
@@ -95,6 +101,21 @@ img{
 
     }
 }
+#btnlogout{
+    background-image: url(img/icons/salir.png);
+    background-color: transparent;
+      background-size: cover; 
+      border: none;
+
+}
+#btnprofile{
+    background-image: url(img/icons/usuario.png);
+    background-color: transparent;
+      background-size: cover; 
+      border: none;
+
+}
+
 #lr{
 
     justify-self: left;
@@ -322,11 +343,19 @@ margin-left: 3rem;
     justify-content: left;
     padding-left: 3rem;
     button{
-        background-color: #8f534c;
         height: 50px;
-        width: 70px;
+        width: 50px;
         
     }
+    button:hover {
+    box-shadow: 0px 2px 0px 0px black;
+    }
+}
+.volver{
+    background-image: url(img/icons/volver.png);
+    background-color: transparent;
+    background-size: cover; 
+    border: none;
 }
 #hitstand{
     display: flex;
@@ -546,4 +575,9 @@ background-color: #637f67;
 }
 .buyitem{
     background-color: #8f534c;
+}
+
+
+.storespr{
+    height: 80px;
 }

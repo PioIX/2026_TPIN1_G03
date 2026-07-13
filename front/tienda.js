@@ -46,7 +46,7 @@ async function genItems(){
 
     if(bog && invitem.active==0){
         document.getElementById("titems").innerHTML+= `
-        <td>${items[i].name}</td>
+        <td><img src="${items[i].imgsrc}" alt="item" class="storespr"></td>
         <td>Comprado</td>
         <td>
         
@@ -54,7 +54,7 @@ async function genItems(){
         </td>`
     }else if(bog && invitem.active==1){
         document.getElementById("titems").innerHTML+= `
-        <td>${items[i].name}</td>
+        <td><img src="${items[i].imgsrc}" alt="item" class="storespr"></td>
         <td>Comprado</td>
         <td>
         <button class="equipped" id="equippeditem${items[i].id}" onclick="unequip(${items[i].id})">Equipado
@@ -62,7 +62,7 @@ async function genItems(){
         </td>`
     }else {
         document.getElementById("titems").innerHTML+= `
-        <td>${items[i].name}</td>
+        <td><img src="${items[i].imgsrc}" alt="item" class="storespr"></td>
         <td>$${items[i].price}</td>
         <td>
         <p></p> 
@@ -90,14 +90,14 @@ for (i=0;i<bgs.length;i++){
   
     if(bog && invitem.active==0){
         document.getElementById("tbackgrounds").innerHTML+= `
-        <td>${bgs[i].name}</td>
+        <td><img src="${bgs[i].imgsrc}" alt="fondo" class="storespr"></td>
         <td>Comprado</td>
         <td>
         <button class="equip" id="equipbg${bgs[i].id}" onclick="itemequip(${bgs[i].id})">Equipar</button>
         </td>`
     }else if(bog && invitem.active==1){
         document.getElementById("tbackgrounds").innerHTML+= `
-        <td>${bgs[i].name}</td>
+        <td><img src="${bgs[i].imgsrc}" alt="fondo" class="storespr"></td>
         <td>Comprado</td>
         <td>
         <button class="equipped" id="equippedbg${bgs[i].id}" onclick="unequip(${bgs[i].id})">Equipado
@@ -105,7 +105,7 @@ for (i=0;i<bgs.length;i++){
         </td>`
     }else{
         document.getElementById("tbackgrounds").innerHTML+= `
-        <td>${bgs[i].name}</td>
+        <td><img src="${bgs[i].imgsrc}" alt="fondo" class="storespr"></td>
         <td>$${bgs[i].price}</td>
         <td>
         <p></p> 
