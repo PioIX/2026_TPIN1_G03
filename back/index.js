@@ -110,12 +110,10 @@ app.get('/ItemsporUsuario', async function(req, res){
 		if (userid && itemid){
 			respuesta = await MySQL.realizarQuery(`SELECT * FROM ItemsporUsuario WHERE userid = ${userid} AND itemid = ${itemid};`)
 
-		}else{if(userid){
+		}else if (userid){
 			respuesta = await MySQL.realizarQuery(`SELECT * FROM ItemsporUsuario WHERE userid = ${userid};`)
 		}else{
 			respuesta = await MySQL.realizarQuery(`SELECT * FROM ItemsporUsuario;`)
-		}
-			
 		}
 	
 			
@@ -249,7 +247,7 @@ app.post('/Estadistica', async function(req, res){
 
 app.delete('/Usuarios', async function(req, res){
 	try {
-		await MySQL.realizarQuery(`SET FOREIGN_KEY_CHECKS = 0;DELETE FROM Usuarios WHERE id = ${req.body.id};SET FOREIGN_KEY_CHECKS = 1;`)
+		await MySQL.realizarQuery(`DELETE FROM Usuarios WHERE id = ${req.body.id};`)
 		res.send({message: "Usuario eliminado"})
 	} catch (error) {
 		console.log('Error:', error.message)
@@ -261,7 +259,7 @@ app.delete('/Usuarios', async function(req, res){
 
 app.delete('/Items', async function(req, res){
 	try {
-		await MySQL.realizarQuery(`SET FOREIGN_KEY_CHECKS = 0;DELETE FROM Items WHERE id = ${req.body.id};SET FOREIGN_KEY_CHECKS = 1;`)
+		await MySQL.realizarQuery(`DELETE FROM Items WHERE id = ${req.body.id};`)
 		res.send({message: "Item eliminado"})
 	} catch (error) {
 		console.log('Error:', error.message)

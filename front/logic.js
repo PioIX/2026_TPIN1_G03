@@ -29,9 +29,9 @@ async function handleSignup(){
         respuestaUsername = prompt("Valor en uso o vacio. Por favor, ingrese uno nuevo...")
         leerUsername = await getUsuarioporUsername(respuestaUsername)
         if (!leerUsername || Object.keys(leerUsername).length===0){
-        coincidencia=false
+            coincidencia=false
         }else{
-        coincidencia=true
+            coincidencia=true
         }
     }
     let respuestaPassword = prompt("Ingrese su contraseña deseada...")
@@ -63,9 +63,9 @@ async function handleLogin(){
     let respuestaUsername = prompt("Ingrese su nombre de usuario...")
     let leerUsername = await getUsuarioporUsername(respuestaUsername)
         if (!leerUsername || Object.keys(leerUsername).length===0){
-        coincidencia=false
+            coincidencia=false
         }else{
-        coincidencia=true
+            coincidencia=true
         }
     if (coincidencia == true) {
         let respuestaPassword = prompt("Ingrese la contraseña del usuario...")
@@ -74,9 +74,9 @@ async function handleLogin(){
         }
         alert("Login exitoso!")
         UserLogged = new Usuario(leerUsername.id)
-        UserLogged.updateuser()
+        await UserLogged.updateuser()
         sessionStorage.setItem("User",JSON.stringify(UserLogged))
-        window.location.reload()
+        tryAdmin()
     } else {
         alert("Usuario no encontrado. Vuelva a intentarlo.")
     }

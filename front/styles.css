@@ -251,11 +251,6 @@ button:hover {
     height: 300px;
 }
 
-.divTabla {
-    display: flex;
-    margin-bottom: 2rem;
-    height: 250px;
-}
 #juego{
    
     background-color: #236749;
@@ -438,6 +433,7 @@ background-color: #637f67;
     padding-top: 60vh;
 }
 
+
 #divtable{
     display: flex;
     width: 80%;
@@ -585,4 +581,68 @@ background-color: #637f67;
 
 .storespr{
     height: 80px;
+/* ADMIN */
+
+.admin_h {
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 300;
+    text-align: center;
+}
+
+#admin_h1{
+    display: block;
+    font-size: 2em;
+    margin-block-start: 0.67em;
+    margin-block-end: 0.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
+.admin_div {
+    font-size: 150%;
+    display: grid;
+    grid-template-rows: 2;
+    grid-template-columns: auto;
+
+    justify-content: center;
+    align-content: center;
+}
+
+#admin_table {
+    display: flex;
+    margin-left: 7rem;
+    margin-right: 7rem;
+    font-size: 30px;
+}
+
+.divTabla {
+    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.admin_tr {
+    border: #236749 solid 2px;
+}
+
+#admin_ht {
+    margin-top: 2rem;
+    margin-left: 7rem;
+    font-family: "Jersey 10", sans-serif;
+    font-weight: 300;
+    font-size: 45px;
+}
+
+#admin_body {
+    background-color: black;
+    color: #236749;
+    overflow: visible;
+    button{
+        height: auto;
+        width: auto ;
+        font-size: 50px;
+        color:black
+    };
 }
