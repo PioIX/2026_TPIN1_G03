@@ -5,106 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administracion</title>
     <link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jacquard+12&family=Jersey+10&family=Tiny5&display=swap" rel="stylesheet">
 </head>
-<body>
-    <h1>ADMINISTRACION</h1>
+<body id="admin_body">
+    <div>
+        <h1 id="admin_h1" class="admin_h">ADMINISTRACION</h1>
 
+        <div class="admin_div">
+            <h2 class="admin_h">Usuarios </h2>
+            <!-- muestra usuarios en pantalla -->
+            <button onclick="verUsers()">
+                Ver usuarios
+            </button>
 
-    <h2>Usuarios </h2>
+            <button onclick="verInventario()">
+                Ver inventario
+            </button>
 
-    <!-- muestra usuarios en pantalla -->
-    <button onclick="verUsers()">
-        Ver
-    </button>
+            <!-- elimina usuarios -->
+            <button onclick="borrarUser()">
+                Eliminar
+            </button>
 
-    <button onclick="verInventario()">
-        Ver inventario
-    </button>
+            <!-- designa admins -->
+            <button onclick="adminUser()">
+                Designar como administrador
+            </button>
 
-    <!-- elimina usuarios -->
-    <button onclick="borrarUser()">
-        Eliminar
-    </button>
+            <!-- descarta admins -->
+            <button onclick="adminUserNon()"> <!-- hecho -->
+                Descartar como administrador
+            </button>
 
-    <!-- designa admins -->
-    <button onclick="adminUser()">
-        Designar como administrador
-    </button>
+            <!-- ajusta puntos -->
+            <button onclick="modPuntosUser()">
+                Modificar puntaje
+            </button>
 
-    <!-- descarta admins -->
-    <button onclick="adminUserNon()"> <!-- hecho -->
-        Descartar como administrador
-    </button>
+            <!-- añade items a un usuario -->
+            <button onclick="addItemUser()"> <!-- pendiente / revisar -->
+                Añadir items
+            </button>
+        </div>
 
-    <!-- ajusta puntos -->
-    <button onclick="modPuntosUser()">
-        Modificar puntaje
-    </button>
+        <div class="admin_div">
+            <h2 class="admin_h">Items</h2>
 
-    <!-- añade items a un usuario -->
-    <button onclick="addItemUser()"> <!-- pendiente / revisar -->
-        Añadir items
-    </button>
+            <!-- muestra items -->
+            <button onclick="verItems()"> 
+                Ver items
+            </button>
 
+            <!-- crea un item -->
+            <button onclick="creaItem()"> <!-- pendiente / revisar -->
+                Crear
+            </button>
 
-    <h2>Items</h2>
+            <!-- borra un item -->
+            <button onclick="borrarItem()">
+                Borrar
+            </button>
 
-    <!-- muestra items -->
-    <button onclick="verItems()"> 
-        Ver
-    </button>
+            <!-- modifica imagen de item -->
+            <button onclick="modItemImage()">
+                Modificar imagen
+            </button>
 
-    <!-- crea un item -->
-    <button onclick="creaItem()"> <!-- pendiente / revisar -->
-        Crear
-    </button>
+            <!-- modifica precio de item -->
+            <button onclick="modItemPrice()">
+                Modificar precio
+            </button>
+        </div>
+        <div class="admin_div">
+            <h2 class="admin_h">Cheats</h2>
+            
+            <!-- +500 puntos para un usuario -->
+            <button onclick="cheatPuntos()">
+                +500 puntos
+            </button>
 
-    <!-- borra un item -->
-    <button onclick="borrarItem()">
-        Borrar
-    </button>
+            <!-- todos los items para un usuario -->
+            <button onclick="cheatItems()"> <!-- hecho -->
+                Dar todos los items
+            </button>
+        </div>
 
-    <!-- modifica imagen de item -->
-    <button onclick="modItemImage()">
-        Modificar imagen
-    </button>
+        <h2 id="admin_ht">Tablas</h2>
+        <div id="admin_table">
+            <div class="divTabla">
+                <table id="ListaDeUsers">
+                </table>
+            </div>
 
-    <!-- modifica precio de item -->
-    <button onclick="modItemPrice()">
-        Modificar precio
-    </button>
+            <div class="divTabla">
+                <table id="ListaDeItems">
+                </table>
+            </div>
 
-
-    <h2>Cheats</h2>
-
-    <!-- +500 puntos para un usuario -->
-    <button onclick="cheatPuntos()">
-        +500 puntos
-    </button>
-
-    <!-- todos los items para un usuario -->
-    <button onclick="cheatItems()"> <!-- hecho -->
-        Dar todos los items
-    </button>
-
-
-    <h2>Tablas</h2>
-
-    <div class="divTabla">
-        <table id="ListaDeUsers">
-        </table>
-    </div>
-
-    <div class="divTabla">
-        <table id="ListaDeItems">
-        </table>
-    </div>
-
-    <div class="divTabla">
-        <table id="ListaDeInventarios">
-        </table>
-    </div>
-
+            <div class="divTabla">
+                <table id="ListaDeInventarios">
+                </table>
+            </div>
+        </div>
+</div>
     <script src="usuarios.js"></script>
     <script src="items.js"></script>
     <script  src="fetch.js"></script>
