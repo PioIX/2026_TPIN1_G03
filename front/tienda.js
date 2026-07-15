@@ -29,9 +29,7 @@ async function genItems(){
         bgs.push(getitems[i])
         }
     }
-    console.log(UserLogged)
     let invent= await getInventario(UserLogged.id) || []
-    console.log(invent)
 //rellena tabla items
 
  for (i=0;i<items.length;i++){
@@ -123,18 +121,17 @@ for (i=0;i<bgs.length;i++){
 }
 
 async function itemequip(itemid){
-    //tiene que chequear si hay otro item equipado y desactivarlo, y activar el item que se quiere equipar
     item= await getItemporID(itemid)
     console.log(item)
     let invent= await getInventario(UserLogged.id) || []
-    
+    console.log(invent)
     if(item.name.includes("Fondo")){
         for (i=0;i<bgs.length;i++){
-        
         for(j=0;j<invent.length;j++){
             if(bgs[i].id ==invent[j].itemid){
+
                 console.log(`Fondo ${invent[j].itemid} desactivado`)
-                await deactivateItem(UserLogged.id,invent[j].itemid)
+                await deactivateItem(invent[j].itemid,UserLogged.id)
             }
         }
         }
@@ -179,6 +176,7 @@ async function additem(itemid){
     if(UserLogged.points<item.price){
         alert("No tiene suficientes puntos para comprar esto")
     }else{
+        stats= await getEstadistica(UserLogged.id)
         if(confirm(`Está seguro de que quiere comprar ${item.name} por $${item.price}?`)){
             console.log(item)
             newitem ={
@@ -188,6 +186,7 @@ async function additem(itemid){
             }
             console.log(newitem)
             await postItemporUsuario(newitem)
+            await putEstadistica({cant_items: stats.cant_items+1, userid: UserLogged.id})
             let pp=UserLogged.points-item.price
             await putPoints(pp,UserLogged.id)
             await UserLogged.updateuser()
@@ -222,7 +221,6 @@ async function itemCheck() {
             for(j=0;j<invent.length;j++){
                 if(bgs[i].id ==invent[j].itemid && invent[j].active){
                     bginv=bgs[i]
-                    console.log(bginv)
 
                 }
             }
@@ -231,7 +229,6 @@ async function itemCheck() {
             for(j=0;j<invent.length;j++){
                 if(items[i].id ==invent[j].itemid && invent[j].active){
                     iteminv=items[i]
-                    console.log(iteminv)
                 }
             }
         }
@@ -241,24 +238,19 @@ async function itemCheck() {
         bod.style.backgroundRepeat = "no-repeat"; 
         bod.style.backgroundPosition = "center";    
         for (i=0;i<its.length;i++){
-            console.log(iteminv.name)
             if (iteminv.name=="Pipi"){
 
                 its[i].innerHTML=`<img src="" alt="">`
 
                 if(UserLogged.points<5){
-                    console.log("huevo")
                     its[i].innerHTML=`<img src="img/spr/pipihuevo.png" alt="">`
                 }else if(UserLogged.points<10){
-                      console.log("medio")
 
                     its[i].innerHTML=`<img src="img/spr/pipimedio.png" alt="">`
                 }else if(UserLogged.points<20){
-                      console.log("normal")
 
                     its[i].innerHTML=`<img src="img/spr/pipinormal.png" alt="">`
                 }else if(UserLogged.points<40){
-                      console.log("amor")
                     its[i].innerHTML=`<img src="img/spr/pipiamor.png" alt="">`
                 }
                 
